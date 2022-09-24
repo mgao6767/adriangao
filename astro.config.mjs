@@ -1,12 +1,18 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import tailwind from "@astrojs/tailwind";
+import { defineConfig } from 'astro/config'
+import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
+import tailwind from '@astrojs/tailwind'
 
-import react from "@astrojs/react";
+import react from '@astrojs/react'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
-  integrations: [mdx(), sitemap(), tailwind(), react()]
-});
+  integrations: [mdx(), sitemap(), tailwind(), react()],
+  // https://github.com/natemoo-re/astro-icon/issues/2
+  vite: {
+    ssr: {
+      external: ['svgo']
+    }
+  }
+})
