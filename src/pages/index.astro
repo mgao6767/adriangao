@@ -1,50 +1,99 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import BaseHead from '../components/BaseHead.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header title={SITE_TITLE} />
+    <main>
+      <div class="flow-root">
+        <div class="float-left hidden md:block">
+          <pre class="my-0 py-0 text-green-700">#!/usr/bin/python3</pre>
+          <pre
+            class="my-0 py-0"><span class="text-blue-600">print</span>("G'day")</pre>
+          <pre
+            class="my-0 py-0"><span class="text-blue-600">print</span>("I'll be on the job market in 2023...")</pre>
+        </div>
+        <div class="float-right rounded-full shadow-md shadow-neutral-600">
+          <img class="rounded-full h-auto max-w-[120px]" src="/adriangao.jpg" />
+        </div>
+      </div>
+      <h2
+        class="text-lg font-bold mb-6 underline underline-offset-8 decoration-4 decoration-orange-900"
+      >
+        Bio.
+      </h2>
+      <p>
+        Mingze Gao (高铭泽) is a Research Fellow at the University of Sydney
+        Business School, where he received a Ph.D. in Finance, a Bachelor of
+        Commerce (Honours) degree in Finance and a Bachelor of Commerce degree
+        in Econometrics and Finance.
+      </p>
+      <p>
+        Mingze is a member of the Business Financing and Banking Research Group
+        at the University of Sydney with research interests in the area of
+        corporate finance and banking. His work has been published at <span
+          class="italic font-semibold"
+        >
+          Journal of Banking & Finance</span
+        >. He has presented at FMA Annual Meeting, FIRN Banking and Financial
+        Stability Meeting, and served as discussant at FMA Annual Meeting.
+      </p>
+      <p>
+        He now works on the Australian Research Council (ARC) Discovery Project
+        titled Reshaping the Landscape of Bank Monitoring and Risk Disclosures
+        (DP210102611).
+      </p>
+      <h2
+        class="text-lg font-bold mb-6 underline underline-offset-8 decoration-4 decoration-orange-900"
+      >
+        Edu.
+      </h2>
+      <table class="table-auto">
+        <tbody>
+          <tr>
+            <td>2017 - 2021</td>
+            <td>Ph.D. in Finance</td>
+            <td>University of Sydney</td>
+          </tr>
+          <tr>
+            <td>2022 -</td>
+            <td>Master of Information Technology</td>
+            <td>University of New South Wales</td>
+          </tr>
+          <tr>
+            <td>2016</td>
+            <td>B.Com (Honours) in Finance</td>
+            <td>University of Sydney</td>
+          </tr>
+          <tr>
+            <td>2013 - 2015</td>
+            <td>B.Com in Econometrics and Finance</td>
+            <td>University of Sydney</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2
+        class="mt-4 text-lg font-bold mb-6 underline underline-offset-8 decoration-4 decoration-orange-900"
+      >
+        Contact.
+      </h2>
+      <ul class="list-disc px-4">
+        <li>
+          Email: <a href="mailto:mingze.gao@sydney.edu.au"
+            >mingze.gao@sydney.edu.au</a
+          >
+        </li>
+        <li>Office: Room 428, H69</li>
+      </ul>
+    </main>
+    <Footer />
+  </body>
 </html>
