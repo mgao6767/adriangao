@@ -26,6 +26,10 @@
   h3 {
     @apply text-base my-4 font-bold;
   }
+
+  ul {
+    @apply list-disc px-4;
+  }
 }
 
 body {
@@ -89,4 +93,9 @@ blockquote {
   padding: 2px 0px 2px 20px;
   margin: 0px;
   font-style: italic;
+}
+
+pre.astro-code {
+  background-color: #f2f2f2 !important;
+  @apply text-sm;
 }
