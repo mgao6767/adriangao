@@ -19,6 +19,13 @@
               before:hover:scale-x-100 before:scale-x-0 before:origin-top-left
               before:transition before:ease-in-out before:duration-300;
   }
+
+  h2 {
+    @apply text-lg my-8 font-bold underline underline-offset-8 decoration-4 decoration-orange-900;
+  }
+  h3 {
+    @apply text-base my-4 font-bold;
+  }
 }
 
 body {
