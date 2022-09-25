@@ -1,0 +1,106 @@
+---
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+}
+let tags = [
+  { tag: 'Python', weight: 5 },
+  { tag: 'C/C++', weight: 4 },
+  { tag: 'Tech', weight: 7 },
+  { tag: 'Math', weight: 5 },
+  { tag: 'Coding', weight: 7 },
+  { tag: 'Writing', weight: 4 },
+  { tag: 'Coffee', weight: 4 },
+  { tag: 'Cat', weight: 6 },
+  { tag: 'Dog', weight: 5 },
+  { tag: 'Badminton', weight: 4 },
+  { tag: '"p<0.01"', weight: 5 },
+  { tag: 'Sports car', weight: 3 },
+  { tag: 'City pop', weight: 4 },
+  { tag: '火锅', weight: 7 },
+  { tag: 'すき焼き', weight: 5 },
+  { tag: 'BBQ', weight: 4 },
+  { tag: '"Accepted"', weight: 8 },
+  { tag: 'Gaming', weight: 5 }
+]
+shuffleArray(tags)
+---
+
+<div class="txtcloud">
+  <ul class="cloud" role="navigation" aria-label="word cloud">
+    {
+      tags.map(({ tag, weight }) => (
+        <li>
+          <a data-weight={weight}>{tag}</a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+<style>
+  div.txtcloud {
+    justify-content: center;
+    align-items: center;
+    width: 100;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  ul.cloud {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    line-height: 2.75rem;
+    width: 90%;
+  }
+
+  ul.cloud a {
+    /*   
+    Not supported by any browser at the moment :(
+    --size: attr(data-weight number); 
+    */
+    --size: 4;
+    --color: #a33;
+    color: var(--color);
+    font-size: calc(var(--size) * 0.25rem + 0.5rem);
+    display: block;
+    padding: 0.125rem 0.25rem;
+    position: relative;
+    text-decoration: none;
+    opacity: calc((15 - (9 - var(--size))) / 15);
+  }
+
+  ul.cloud a[data-weight='1'] {
+    --size: 1;
+  }
+  ul.cloud a[data-weight='2'] {
+    --size: 2;
+  }
+  ul.cloud a[data-weight='3'] {
+    --size: 3;
+  }
+  ul.cloud a[data-weight='4'] {
+    --size: 4;
+  }
+  ul.cloud a[data-weight='5'] {
+    --size: 6;
+  }
+  ul.cloud a[data-weight='6'] {
+    --size: 8;
+  }
+  ul.cloud a[data-weight='7'] {
+    --size: 10;
+  }
+  ul.cloud a[data-weight='8'] {
+    --size: 13;
+  }
+  ul.cloud a[data-weight='9'] {
+    --size: 16;
+  }
+</style>
