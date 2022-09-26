@@ -101,7 +101,7 @@ I am to going to use Monte Carlo simulations to find out the distribution of buy
 
 For simplicity, I'm going to make the following assumptions:
 
-- the share price when the contract is signed $S_t=\$100$.
+- the share price when the contract is signed $S_t=100$.
 - the strike price and the knock-out price are symmetric around \$100.
 	- the strike price $K=100-k$
 	- the knock-out price $K^+=100+k$
