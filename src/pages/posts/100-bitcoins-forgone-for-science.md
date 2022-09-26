@@ -12,7 +12,7 @@ An interesting question is, what if I didn’t donate my computers to volunteer 
 
 According to [WCG’s website](https://www.worldcommunitygrid.org/help/viewTopic.do?shortName=points), 7 WCG Point are equal to 1 BOINC credit, which represents 1/100 day of CPU time on a reference computer that does 1,000 MFLOPS based on the [Whetstone benchmark](https://en.wikipedia.org/wiki/Whetstone_(benchmark)).
 
-However, the defnition of BOINC credit has been changed to 1/200 day of CPU time since 2010, though on WCG’s website it still says the total WCG Points divided by 700 gives the number of GigaFLOPs. I’m going to stick to the WCG’s website for now.
+However, the definition of BOINC credit has been changed to 1/200 day of CPU time since 2010, though on WCG’s website it still says the total WCG Points divided by 700 gives the number of GigaFLOPs. I’m going to stick to the WCG’s website for now.
 
 Suppose I’ve got one WCG Point today, then it means my computer has spent 1/700 day of CPU time, i.e. 123 seconds, at a computing rate of 1 GigaFLOP/second. So, if I can convert GigaFLOPs to Bitcoin hashrate, the problem will be quite easy.
 
