@@ -28,7 +28,11 @@
   }
 
   ul {
-    @apply list-disc px-4;
+    @apply list-disc px-6;
+  }
+
+  ol {
+    @apply list-decimal px-6;
   }
 }
 
