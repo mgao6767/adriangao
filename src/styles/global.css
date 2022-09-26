@@ -34,6 +34,19 @@
   ol {
     @apply list-decimal px-6;
   }
+
+  table {
+    overflow-x: scroll;
+    display: block;
+    @apply sm:relative sm:left-[50%] sm:translate-x-[-50%] sm:table;
+    @apply my-6 shadow-md;
+  }
+  th {
+    @apply bg-gray-50 p-2;
+  }
+  tr td {
+    @apply p-1;
+  }
 }
 
 body {
