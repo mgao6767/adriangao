@@ -26,6 +26,9 @@
   h3 {
     @apply text-base my-4 font-bold;
   }
+  h4 {
+    @apply text-base my-4 font-bold italic;
+  }
 
   ul {
     @apply list-disc px-6;
