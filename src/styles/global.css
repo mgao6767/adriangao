@@ -41,14 +41,11 @@
   table {
     overflow-x: scroll;
     display: block;
-    @apply sm:relative sm:left-[50%] sm:translate-x-[-50%] sm:table sm:w-[100%] sm:text-sm;
+    @apply sm:relative sm:left-[50%] sm:translate-x-[-50%] sm:table;
     @apply my-6 shadow-md;
   }
   th {
     @apply bg-gray-50 p-2;
-  }
-  th:first-of-type {
-    width: 25%;
   }
   tr td {
     @apply p-1;
