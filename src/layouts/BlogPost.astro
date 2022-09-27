@@ -11,11 +11,20 @@ export interface Props {
     updatedDate?: string
     heroImage?: string
     hasTex?: boolean
+    noReadingTime?: boolean
   }
 }
 
 const {
-  content: { title, description, pubDate, updatedDate, heroImage, hasTex }
+  content: {
+    title,
+    description,
+    pubDate,
+    updatedDate,
+    heroImage,
+    hasTex,
+    noReadingTime
+  }
 } = Astro.props
 
 const { minutesRead } = Astro.props.frontmatter
@@ -64,9 +73,7 @@ const { minutesRead } = Astro.props.frontmatter
               </span>
             )
           }
-          <span>
-            | {minutesRead}
-          </span>
+          {!noReadingTime && <span>| {minutesRead}</span>}
         </div>
         <hr />
         <slot />
