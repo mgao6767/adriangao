@@ -41,6 +41,19 @@ pre[class*='language-'] {
 pre[class*='language-'] > code {
   display: block;
   overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+pre[class*='language-'] > code::-webkit-scrollbar {
+  height: 5px;
+}
+
+pre[class*='language-'] > code::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+pre[class*='language-'] > code::-webkit-scrollbar-thumb {
+  @apply bg-gray-200; /* color of the scroll thumb */
 }
 
 /* Inline code */

@@ -52,6 +52,18 @@
   }
 }
 
+body::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-orange-900;
+}
+
 body {
   font-family: Verdana, sans-serif;
   margin: auto;
