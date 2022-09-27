@@ -41,7 +41,7 @@
   table {
     overflow-x: scroll;
     display: block;
-    @apply sm:relative sm:left-[50%] sm:translate-x-[-50%] sm:table;
+    @apply sm:relative sm:left-[50%] sm:translate-x-[-50%] sm:table sm:w-[100%] sm:text-sm;
     @apply my-6 shadow-md;
   }
   th {
