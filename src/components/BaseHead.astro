@@ -4,6 +4,9 @@
 import '../styles/global.css'
 import '../styles/prism.css'
 
+import { SITE_TITLE } from '../config'
+let TITLE_SUFFIX = ' - ' + SITE_TITLE.replace('Dr. ', '')
+
 export interface Props {
   title: string
   description: string
@@ -20,8 +23,11 @@ const { title, description, image = '/adriangao.jpg' } = Astro.props
 <meta name="generator" content={Astro.generator} />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
+<title>{title === SITE_TITLE ? title : title + TITLE_SUFFIX}</title>
+<meta
+  name="title"
+  content={title === SITE_TITLE ? title : title + TITLE_SUFFIX}
+/>
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
