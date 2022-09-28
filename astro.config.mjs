@@ -6,6 +6,7 @@ import react from '@astrojs/react'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
+import remarkPrism from 'remark-prism'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 
 // https://astro.build/config
@@ -20,7 +21,12 @@ export default defineConfig({
   },
   markdown: {
     // extendDefaultPlugins: true,
-    remarkPlugins: [remarkMath, remarkGfm, remarkReadingTime],
+    remarkPlugins: [
+      remarkMath,
+      remarkGfm,
+      remarkReadingTime,
+      [remarkPrism, { plugins: ['line-numbers'] }]
+    ],
     rehypePlugins: [
       [
         rehypeKatex,
@@ -43,6 +49,6 @@ export default defineConfig({
         }
       ]
     ],
-    syntaxHighlight: 'prism'
+    syntaxHighlight: false
   }
 })

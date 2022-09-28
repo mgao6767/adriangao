@@ -12,7 +12,7 @@ This is the SAS macro I write to consolidate and extract BHC's balance sheet
 data from WRDS Bank Regulatory database. It creates a `bhcf` dataset in the work
 directory.
 
-```sas
+```sas[class='line-numbers']
 %macro bhc_financials(loopdatestart,loopdateend);
     /* Specify the variables to extract */
     %let vars=rssd9999 rssd9001 rssd9007 rssd9008 bhck2170 bhck3210;
