@@ -34,9 +34,11 @@ $$
 subject to the individual rationality or participation constraint (IR) and incentive compatibility constraint (IC) as follows:
 
 $$
+\begin{gathered}
     E\left[u\left(v\left(c\left(V\left(a,o\right)\right)\right)-g\left(a\right)\right)\right] \ge \underline{U}
     \\
     a \in \arg\max_{\hat{a}}E\left[u\left(v\left(c\left(V\left(\hat{a},o\right)\right)\right)-g\left(\hat{a}\right)\right)\right]
+\end{gathered}
 $$
 
 We first consider the case where the optimal effort is determined endogenously. Under the [Holmstrom and Milgrom (1987)](https://doi.org/10.2307/1913238) framework, the following assumptions are made:
@@ -55,14 +57,16 @@ $$
 subject to
 
 $$
+\begin{gathered}
     E\left[-e^{-\eta\left(c-\frac{1}{2}ga^{*2}\right)}\right] \ge \underline{U}
     \\
     a^* \in \arg\max_{\hat{a}} E\left[-e^{-\eta\left(c-\frac{1}{2}g\hat{a}^2\right)}\right]
+\end{gathered}
 $$
 
 Substituting in $c=\phi+\theta V$ and $V(a,o)=f(a,o)+\varepsilon$, maximizing the agent’s (negative exponential) utility function is equivalent to maximizing $\phi+\theta f(a,o)-\frac{1}{2}ga^2-\frac{1}{2}\eta \theta^2 \sigma^2$.
 
-Since $f(a,o)=a+(1-a)o$, the first-order condition of the agent’s objective function with respect to a is given by $a^*=\theta(1-o)⁄g$, which implies his effort choice is decreasing in the cost of effort $g$, decreasing in the firm’s organization capital $o$, and increasing in the pay-for-performance sensitivity $\theta$.
+Since $f(a,o)=a+(1-a)o$, the first-order condition of the agent’s objective function with respect to a is given by $a^*=\theta(1-o)\mathbin{/}g$, which implies his effort choice is decreasing in the cost of effort $g$, decreasing in the firm’s organization capital $o$, and increasing in the pay-for-performance sensitivity $\theta$.
 
 Moreover, his chosen effort is independent of the fixed wage $\phi$, so that the principal can adjust the fixed pay to satisfy his participation constraint without affecting the incentives. Substituting $a^*=\theta(1-o)⁄g$ into the principal’s objective function and setting the participation constraint to bind, the optimal level of pay-for-performance sensitivity is given by:
 
@@ -74,10 +78,12 @@ $$
 This optimal level of pay-for-performance sensitivity is derived as follows. Substituting $c=\phi + \theta V$ and $V(a,o)=f(a,o)+\varepsilon$ into the agent's objective function of $E\left[U\right]=E\left[u\left(v(c)-g(a)\right)\right]$, where $u(x)=-e^{-\eta x}$, $v(c)=c$, and $\varepsilon \sim N(0,\sigma^2)$, we obtain:
 
 $$
-E\left[U\right] = E\left[e^{-\eta \left(\phi+\theta f(a,o)+\theta\varepsilon-\frac{1}{2}ga^2\right)}\right] \\
-= -E\left[e^{-\eta \left(\phi+\theta f(a,o)-\frac{1}{2}ga^2\right)}\right] \times E\left[e^{-\eta \theta \varepsilon}\right]\\
-= -e^{-\eta \left(\phi+\theta f(a,o)-\frac{1}{2}ga^2\right)} \times e^{\frac{\eta^2 \theta^2 \sigma^2}{2}} \\
-= -e^{-\eta \left(\phi+\theta f(a,o)-\frac{1}{2}ga^2-\frac{1}{2}\eta \theta^2 \sigma^2\right)}
+\begin{align*}
+E\left[U\right] &= E\left[e^{-\eta \left(\phi+\theta f(a,o)+\theta\varepsilon-\frac{1}{2}ga^2\right)}\right] \\
+&= -E\left[e^{-\eta \left(\phi+\theta f(a,o)-\frac{1}{2}ga^2\right)}\right] \times E\left[e^{-\eta \theta \varepsilon}\right]\\
+&= -e^{-\eta \left(\phi+\theta f(a,o)-\frac{1}{2}ga^2\right)} \times e^{\frac{\eta^2 \theta^2 \sigma^2}{2}} \\
+&= -e^{-\eta \left(\phi+\theta f(a,o)-\frac{1}{2}ga^2-\frac{1}{2}\eta \theta^2 \sigma^2\right)}
+\end{align*}
 $$
 
 The first-order condition (FOC) of the agent with respect to $a$ is given by
@@ -89,7 +95,7 @@ $$
 Since we assume $f(a,o)=a+(1-a)o$, this yields the agent's FOC:
 
 $$
-a^*=\theta(1-o)/g
+a^*=\frac{\theta(1-o)}{g}
 $$
 
 Setting the participation constraint to bind, we have
@@ -104,18 +110,22 @@ $$
 \phi + \theta\left(a^*+\left(1-a^*\right)o\right)-\frac{1}{2}ga^{*2}-\frac{1}{2}\eta\theta^2\sigma^2=w
 $$
 
-where $w\equiv -\ln(-\underline{U})/\eta$ is a constant determined by the agent's reservation utility and his coefficient of constant absolute risk aversion. Substituting in $a^*=\theta(1-o)/g$, we yield
+where $w\equiv -\ln(-\underline{U})\mathbin{/} \eta$ is a constant determined by the agent's reservation utility and his coefficient of constant absolute risk aversion. Substituting in $a^*=\theta(1-o)\mathbin{/}g$, we yield
 
 $$
-E\left[c\right] = \phi + \theta E\left[V\right] \\
-= w+\frac{\theta^2(1-o)^2}{2g} +\frac{1}{2}\eta\theta^2\sigma^2
+\begin{align*}
+E\left[c\right] &= \phi + \theta E\left[V\right] \\
+&= w+\frac{\theta^2(1-o)^2}{2g} +\frac{1}{2}\eta\theta^2\sigma^2
+\end{align*}
 $$
 
-Thus, by substituting $a^*=\theta(1-o)/g$ into the principal’s objective function $E\left[V-c\right]$, we yield
+Thus, by substituting $a^*=\theta(1-o)\mathbin{/}g$ into the principal’s objective function $E\left[V-c\right]$, we yield
 
 $$
+\begin{gathered}
 a^*+(1-a^*)o-\left[w+\frac{\theta^2(1-o)^2}{2g}+\frac{1}{2}\eta\theta^2\sigma^2\right] \\
 =\frac{\theta}{g}(1-o)^2+o-\left[w+\frac{\theta^2(1-o)^2}{2g}+\frac{1}{2}\eta\theta^2\sigma^2\right]
+\end{gathered}
 $$
 
 The principal's FOC with respect to $\theta$ yields:
@@ -127,7 +137,7 @@ $$
 
 Other things equal, we can see that the optimal pay-for-performance sensitivity $\theta$ is decreasing in the firm’s organization capital $o$. Specifically, this substitution effect is from the fact that OC reduces the marginal effect of executive effort on firm outcomes and thus reduces the optimal effort level endogenously.
 
-On the other hand, fixing $a^*$, the required pay-for-performance sensitivity is $\theta=(a^* g)/(1-o)$, which is increasing in organization capital $o$. Thus, to elicit any given level of effort, the incentive compensation must be more high-powered ("fixed target action" as in [Edmans and Gabaix (2016)](https://www.aeaweb.org/articles?id=10.1257/jel.20161153).
+On the other hand, fixing $a^*$, the required pay-for-performance sensitivity is $\theta=(a^* g)\mathbin{/}(1-o)$, which is increasing in organization capital $o$. Thus, to elicit any given level of effort, the incentive compensation must be more high-powered ("fixed target action" as in [Edmans and Gabaix (2016)](https://www.aeaweb.org/articles?id=10.1257/jel.20161153).
 
 The relation between OC and executive pay-for-performance sensitivity depends critically on the optimal level of effort the principal wants to implement:
 
