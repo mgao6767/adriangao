@@ -60,7 +60,8 @@ pre[class*='language-'] {
 pre[class*='language-'] {
   background: #fdfdfd;
 }
-:not(pre) > code[class*='language-'] {
+:not(pre) > code[class*='language-'],
+:not(pre) > code {
   background: #e8e8e8e8;
   padding: 0.1em;
   padding-left: 0.2em;

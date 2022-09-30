@@ -25,7 +25,13 @@ export default defineConfig({
       remarkMath,
       remarkGfm,
       remarkReadingTime,
-      [remarkPrism, { plugins: ['line-numbers'], transformInlineCode: true }]
+      [
+        remarkPrism,
+        {
+          plugins: ['line-numbers'],
+          transformInlineCode: false
+        }
+      ]
     ],
     rehypePlugins: [
       [
