@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'Dr. Mingze Gao'
 export const SITE_DESCRIPTION = "Mingze Gao's personal website!"
+export const CV_PATH = '/cv.pdf'
