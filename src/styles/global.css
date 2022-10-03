@@ -117,3 +117,8 @@ blockquote {
   margin: 0px;
   font-style: italic;
 }
+
+/* A fix to https://github.com/ant-design/ant-design/issues/25900 */
+.anticon {
+  vertical-align: middle;
+}
