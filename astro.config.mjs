@@ -11,7 +11,7 @@ import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://mingze-gao.com',
   integrations: [mdx(), sitemap(), tailwind(), react()],
   // https://github.com/natemoo-re/astro-icon/issues/2
   vite: {
