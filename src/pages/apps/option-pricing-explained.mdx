@@ -1,0 +1,19 @@
+---
+layout: '../../layouts/BlogPost.astro'
+title: Option Pricing Explained
+description: 'An interactive option price calculator.'
+noReadingTime: true
+---
+
+import BaseHead from '../../components/BaseHead.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import { SITE_DESCRIPTION } from '../../config'
+
+import OptionPricingApp from '../../components/option-pricing/option-pricing.jsx'
+
+An interactive European option price calculator.
+
+<br />
+
+<OptionPricingApp client:load />
