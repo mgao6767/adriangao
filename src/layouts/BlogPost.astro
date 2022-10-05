@@ -12,6 +12,7 @@ export interface Props {
     heroImage?: string
     hasTex?: boolean
     noReadingTime?: boolean
+    noComment?: boolean
   }
 }
 
@@ -23,7 +24,8 @@ const {
     updatedDate,
     heroImage,
     hasTex,
-    noReadingTime
+    noReadingTime,
+    noComment
   }
 } = Astro.props
 
@@ -78,6 +80,31 @@ const { minutesRead } = Astro.props.frontmatter
         <hr />
         <slot />
       </article>
+      {
+        !noComment && (
+          <div class="comment">
+            <hr />
+            <script
+              is:inline
+              src="https://giscus.app/client.js"
+              data-repo="mgao6767/adriangao"
+              data-repo-id="R_kgDOIEtKkQ"
+              data-category="Comments"
+              data-category-id="DIC_kwDOIEtKkc4CRq35"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="en"
+              data-loading="lazy"
+              crossorigin="anonymous"
+              async
+            />
+          </div>
+        )
+      }
     </main>
     <Footer />
   </body>
