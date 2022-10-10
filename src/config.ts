@@ -3,4 +3,6 @@
 
 export const SITE_TITLE = 'Dr. Mingze Gao'
 export const SITE_DESCRIPTION = "Mingze Gao's personal website!"
+export const SITE_IMAGE = '/adriangao.jpg'
+export const SITE_FAVICON = '/favicon.png'
 export const CV_PATH = '/cv.pdf'

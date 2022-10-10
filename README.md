@@ -50,6 +50,11 @@ npm install
 npm run dev
 ```
 
+Configuration:
+
+- Google Analytics v4 code is located at `src/components/BaseHead.astro`
+- giscus comment code is located at `src/layouts/BlogPost.astro`
+
 ## Credit
 
 This theme is based off of the Astro's [blog theme](https://astro.build/themes/blog/) and lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
