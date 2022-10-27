@@ -25,7 +25,7 @@ jobs:
           python-version: '3.10'
       - name: Inject site stats from Google Analytics V4 API
         env:
-          GOOGLE_CLIENT_SECRET_BASE64: ${{ secrets.GOOGLE_CLIENT_SECRETS_BASE64 }}
+          GOOGLE_CLIENT_SECRETS_BASE64: ${{ secrets.GOOGLE_CLIENT_SECRETS_BASE64 }}
           GOOGLE_PROPERTY_ID: ${{ secrets.GOOGLE_PROPERTY_ID }}
         run: |
           pip install google-analytics-data
