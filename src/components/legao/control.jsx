@@ -125,6 +125,7 @@ function ButtonsAfterResult() {
   const dispatch = useDispatch()
   const resultImage = useSelector(state => state.resultImage)
   const imageUrl = 'https://api.adrian-gao.com/legao/result/' + resultImage
+  const instructionUrl = imageUrl + '.instruction.xlsx'
   const handleRedo = e => {
     e.preventDefault()
     dispatch(updateResultImage(null))
@@ -136,10 +137,17 @@ function ButtonsAfterResult() {
           <UndoOutlined /> Retry
         </Button>
       </Col>
-      <Col span={8}>
+      <Col>
         <a href={imageUrl} download="legao.png">
+          <Button type="default" block>
+            <DownloadOutlined /> Download Image
+          </Button>
+        </a>
+      </Col>
+      <Col span={8}>
+        <a href={instructionUrl} download="legao.xlsx">
           <Button type="primary" block>
-            <DownloadOutlined /> Download
+            <DownloadOutlined /> Download Instruction
           </Button>
         </a>
       </Col>
