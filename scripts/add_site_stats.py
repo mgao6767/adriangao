@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
     print(activeUser, pageViews)
 
-    with open("./src/components/Stats.astro", 'w') as f:
+    with open("./src/components/Stats.astro", 'r+') as f:
         content = f.read()
         content = content.replace("STAT_ACTIVE_USERS", f"{int(activeUser):,}")
         content = content.replace("STAT_PAGEVIEWS", f"{int(pageViews):,}")
