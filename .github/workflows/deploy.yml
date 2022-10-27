@@ -19,10 +19,11 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v2
-      - name: Inject site stats from Google Analytics V4 API
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+      - name: Inject site stats from Google Analytics V4 API
         env:
           GOOGLE_CLIENT_SECRET_BASE64: ${{ secrets.GOOGLE_CLIENT_SECRETS_BASE64 }}
           GOOGLE_PROPERTY_ID: ${{ secrets.GOOGLE_PROPERTY_ID }}
