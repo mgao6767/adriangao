@@ -51,4 +51,6 @@ if __name__ == "__main__":
         content = f.read()
         content = content.replace("STAT_ACTIVE_USERS", f"{int(activeUser):,}")
         content = content.replace("STAT_PAGEVIEWS", f"{int(pageViews):,}")
+        f.seek(0)
+        f.truncate()
         f.write(content)
