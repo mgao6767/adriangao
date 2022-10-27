@@ -1,6 +1,9 @@
 name: Github Pages Astro CI
 
 on:
+  # Schedule to update site stats daily at 00:05
+  schedule:
+    - cron: '5 0 * * *'
   # Trigger the workflow every time you push to the `main` branch
   push:
     branches: [main]

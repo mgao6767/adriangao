@@ -47,10 +47,8 @@ if __name__ == "__main__":
 
     print(activeUser, pageViews)
 
-    with open("./src/pages/about.mdx", 'a') as f:
-        f.write("\n")
-        f.write("## Site Stats")
-        f.write("\n")
-        f.write("\n")
-        f.write(f"**{activeUser}** active users and **{pageViews}** page views in the past 30 days.")
-        f.write("\n")
+    with open("./src/components/Stats.astro", 'w') as f:
+        content = f.read()
+        content = content.replace("STAT_ACTIVE_USERS", f"{int(activeUser):,}")
+        content = content.replace("STAT_PAGEVIEWS", f"{int(pageViews):,}")
+        f.write(content)
