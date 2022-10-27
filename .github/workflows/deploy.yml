@@ -19,6 +19,15 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v2
+      - name: Inject site stats from Google Analytics V4 API
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+        env:
+          GOOGLE_CLIENT_SECRET_BASE64: ${{ secrets.GOOGLE_CLIENT_SECRETS_BASE64 }}
+          GOOGLE_PROPERTY_ID: ${{ secrets.GOOGLE_PROPERTY_ID }}
+        run: pip install google-analytics-data
+        run: python scripts/add_site_stats.py
       - name: Install, build, and upload your site
         uses: withastro/action@v0
 
