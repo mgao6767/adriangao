@@ -2,6 +2,7 @@
 layout: '../../layouts/BlogPost.astro'
 title: Accumulator Option Pricing
 pubDate: May 29, 2019
+updatedDate: Nov 17, 2022
 hasTex: true
 heroImage: "/images/accumulator-95-105.png"
 tags:
