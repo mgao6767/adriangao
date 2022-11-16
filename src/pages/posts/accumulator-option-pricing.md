@@ -120,10 +120,10 @@ The simulation code I write below leverages [Numba](http://numba.pydata.org/) to
 For 1 million simulations per pair of $(k, \sigma)$, it takes about 2 seconds on my laptop with JIT and almost 1 minute without it.
 
 ```python
-import random
 import numpy as np
 from collections import OrderedDict
-from numba import jitclass, int32, float32
+from numba import int32, float32
+from numba.experimental import jitclass
 
 
 @jitclass(OrderedDict({
@@ -172,7 +172,33 @@ class FastSimulation:
 
 ### 5.3. Results
 
-Numbers are boring. So here I put two plots showing the distribution of the buyer's payoffs.
+Numbers are boring. So here I put two plots showing the distribution of the buyer's payoffs. The Python code to generate the plots is as below (1000 simulations).
+
+```python
+import plotly.figure_factory as ff
+import plotly.graph_objs as go
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+
+init_notebook_mode(connected=True)
+
+hist_data, group_labels = [], []
+
+for v in range(1, 6):
+    hist_data.append(FastSimulation(times=1_000, strike_price=95, knock_out_price=105, volatility=v).run())
+    group_labels.append(f'Volatility = {v}%')
+    
+colors = ['#75b0ec', '#338be3', '#34669c', '#344054', '#161c25']
+
+# Create distplot with curve_type set to 'normal'
+fig = ff.create_distplot(hist_data, group_labels, show_hist=False, colors=colors, curve_type="kde")
+
+# Add title
+fig['layout'].update(title='Accumulator With Strike Price of 95 and Knock-Out Price of 105 | MingzeGao', 
+                    xaxis=dict(title="Buyer's Payoff", range=[-700e3, 300e3]), yaxis=dict(title='Probability'))
+
+# Plot!
+iplot(fig)
+```
 
 #### 5.3.1. $k=5$ and $v\in [1..5]$
 
