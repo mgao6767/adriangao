@@ -4,6 +4,7 @@ import { legacy_createStore as createStore } from 'redux'
 import { allReducers } from './reducers'
 import UploadDragger from './upload'
 import Control from './control'
+import BrickList from './brickList'
 
 import 'antd/lib/upload/style/index.css'
 import 'antd/lib/button/style/index.css'
@@ -16,6 +17,9 @@ import 'antd/lib/radio/style/index.css'
 import 'antd/lib/slider/style/index.css'
 import 'antd/lib/spin/style/index.css'
 import 'antd/lib/input-number/style/index.css'
+import 'antd/lib/list/style/index.css'
+import 'antd/lib/avatar/style/index.css'
+import 'antd/lib/statistic/style/index.css'
 
 const store = createStore(allReducers /* preloadedState, */)
 
@@ -26,6 +30,8 @@ export default function LeGaoApp() {
         <UploadDragger />
         <br />
         <Control />
+        <br />
+        <BrickList />
       </div>
     </Provider>
   )
