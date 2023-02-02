@@ -51,10 +51,12 @@ const { title, description, image = SITE_IMAGE } = Astro.props
   is:inline
 ></script>
 <script is:inline>
-  window.dataLayer = window.dataLayer || []
-  function gtag() {
-    dataLayer.push(arguments)
-  }
-  gtag('js', new Date())
-  gtag('config', 'G-1QDTTQ6EHM')
+  if (document.location.hostname.search("mingze-gao.com") !== -1) {
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+    gtag('config', 'G-1QDTTQ6EHM')
+}
 </script>
