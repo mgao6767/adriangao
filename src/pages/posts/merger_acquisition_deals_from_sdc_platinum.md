@@ -14,6 +14,8 @@ This post documents the steps of downloading M&A deals from the SDC Platinum dat
 * the deal value is at least $1m, and
 * the form of the deal is a acquisition, a merger or an acquisition of majority interest.
 
+## Table of Contents
+
 ## Interface of SDC Platinum
 
 The screenshot below is the interface we'll see on launch of SDC Platinum. Click on `Login` and we'll be asked to enter our initials and a project name for billing purpose.

@@ -8,6 +8,7 @@ import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import remarkPrism from 'remark-prism'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
+import remarkToc from 'remark-toc'
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,6 +23,7 @@ export default defineConfig({
   markdown: {
     // extendDefaultPlugins: true,
     remarkPlugins: [
+      [remarkToc, { tight: true, ordered: false }],
       remarkMath,
       remarkGfm,
       remarkReadingTime,

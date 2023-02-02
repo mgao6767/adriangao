@@ -11,6 +11,8 @@ tags:
 
 An [accumulator](https://en.wikipedia.org/wiki/Accumulator_(structured_product)) is a financial derivative that is sometimes known as "*I kill you later*". This post attempts to explain how it is structured and price it via Monte Carlo simulations in Python.
 
+## Table of Contents
+
 ## 1. Overview of Accumulator
 
 Like all derivatives, there are two parties involved in an accumulator, the buyer and the seller, both agree on a **strike price** that is usually at a discount to the prevailing market price of the underlying security at the time of contract origination.

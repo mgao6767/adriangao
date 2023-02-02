@@ -7,6 +7,8 @@ pubDate: May 22, 2020
 
 Taking up the position of CEO means more than pressure from the board and investors. You’ll also face heavy scrutiny from academia. Whether or not a firm’s hiring and compensation committees use them as a reference, here are some of the findings that you may want to be aware of.
 
+## Table of Contents
+
 ## Upon birth
 
 There are many things determined when you’re born. It’ll be naive to think that they matter less than anything else. A starter example is the Journal of Financial Economics paper *"Are CEOs born leaders? Lessons from traits of a million individuals"* by [Adams, Keloharju and Knupfer (2018)](https://doi.org/10.1016/j.jfineco.2018.07.006).

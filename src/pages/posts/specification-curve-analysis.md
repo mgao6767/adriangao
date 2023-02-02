@@ -10,6 +10,8 @@ More often than not, empirical researchers need to argue that their chosen model
 
 > So, **_why not run all possible model specifications and find a concise way to report them all?_**
 
+## Table of Contents
+
 ## The Specification Curve
 
 The idea of specification curve is a direct answer to the question provided by Simonsohn, Simmons and Nelson (2020).[^1] [^2]

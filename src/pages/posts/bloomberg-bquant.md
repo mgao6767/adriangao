@@ -6,6 +6,8 @@ pubDate: May 22, 2020
 
 Bloomberg is developing a new function in the Terminal, called BQuant, BQNT<GO>, under the Bloomberg Anywhere license. I happen to be able to test it thanks to a fund manager and find it could be a future way of using Bloomberg Terminal.
 
+## Table of Contents
+
 ## Background
 
 Bloomberg recently made JupyterLab available inside the Terminal and invited partners to test it out. This function is named **BQuant**, or **BQNT<GO\>**, which is still under heavy development, but the idea is just great. Jupyter notebooks inside Bloomberg Terminal! Just before this news, I was helping a fund manager in writing some alert programs that do some analysis on equity market and then send email notifications, which didn’t go well because first it is very easy to breach the data limit using Bloomberg API (blpapi) and second I wasn’t very comfortable about the presentation of analysis results. I was using poor HTML code in emails and didn’t find a convenient way to insert plots and figures. Besides, I was also writing some back testing code to evaluate potential trading strategies. But still there’s a concern as I won’t be working there full time and they probably won’t have a permanent programmer, so if they want to alter parameters a little bit it’ll be a problem.

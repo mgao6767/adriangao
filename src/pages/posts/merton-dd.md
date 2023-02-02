@@ -8,6 +8,8 @@ hasTex: true
 
 Merton (1974) Distance to Default (DD) model is useful in forecasting defaults. This post documents a few ways to empirically estimate Merton DD (and default probability) as in Bharath and Shumway (2008 RFS).
 
+## Table of Contents
+
 ## The Merton Model
 
 The total value of a firm follows geometric Brownian motion,
