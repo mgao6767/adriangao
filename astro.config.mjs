@@ -12,7 +12,7 @@ import remarkToc from 'remark-toc'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mingze-gao.com',
+  site: 'https://mingze-gao.com/',
   integrations: [mdx(), sitemap(), tailwind(), react()],
   // https://github.com/natemoo-re/astro-icon/issues/2
   vite: {
@@ -21,7 +21,6 @@ export default defineConfig({
     }
   },
   markdown: {
-    // extendDefaultPlugins: true,
     remarkPlugins: [
       [remarkToc, { tight: true, ordered: false }],
       remarkMath,
