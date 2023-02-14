@@ -57,29 +57,49 @@ Run the following command in Stata:
 net install specurve, from("https://raw.githubusercontent.com/mgao6767/specurve/master") replace
 ```
 
-### Example usage & output
+## Example usage & output
+
+### Regressions with `reghdfe`
 
 ```stata
 . use "http://www.stata-press.com/data/r13/nlswork.dta", clear
 (National Longitudinal Survey.  Young Women 14-26 years of age in 1968)
 
-. copy "https://mingze-gao.com/specurve/example_config_nlswork_1.yml" ., replace
+. copy "https://mingze-gao.com/specurve/example_config_nlswork_reghdfe.yml" ., replace
 
-. specurve using example_config_nlswork_1.yml, width(2) height(2.5) relativesize(0.5) saving(specurve_demo)
-[specurve] 22:11:02 - 40 total specifications to estimate.
-[specurve] 22:11:02 - Estimating model 1 of 40
+. specurve using example_config_nlswork_reghdfe.yml, saving(specurve_demo)
+[specurve] 11:33:54 - 72 total specifications to estimate.
+[specurve] 11:33:54 - Estimating model 1 of 72
   ...
-[specurve] 22:11:04 - Estimating model 40 of 40
-[specurve] 22:11:04 - 37 out of 40 models have point estimates significant at 1% level.
-[specurve] 22:11:04 - 40 out of 40 models have point estimates significant at 5% level.
-[specurve] 22:11:04 - Plotting specification curve...
+[specurve] 11:34:00 - Estimating model 72 of 72
+[specurve] 11:34:00 - 69 out of 72 models have point estimates significant at 1% level.
+[specurve] 11:34:00 - 72 out of 72 models have point estimates significant at 5% level.
+[specurve] 11:34:00 - Plotting specification curve...
 (file specurve_demo.gph saved)
-[specurve] 22:11:04 - Completed.
+[specurve] 11:34:01 - Completed.
 ```
 
-![example1](https://github.com/mgao6767/specurve/raw/main/images/example1.png)
+![example_reghdfe](https://github.com/mgao6767/specurve/raw/main/images/example_reghdfe.png)
 
-The associated help file contains a step-by-step guide on using [**`specurve`**](https://github.com/mgao6767/specurve). To open the help file, type `help specurve` in Stata after installation.
+### IV regressions with `ivreghdfe`
+
+```stata
+. copy "https://mingze-gao.com/specurve/example_config_nlswork_ivreghdfe.yml" ., replace
+. specurve using example_config_nlswork_ivreghdfe.yml, cmd(ivreghdfe) rounding(0.01) title("IV regression with ivreghdfe")
+```
+
+![example_ivreghdfe](https://github.com/mgao6767/specurve/raw/main/images/example_ivreghdfe.png)
+
+Check `help specurve` in Stata for a step-by-step guide.
+
+### Post estimation
+
+Estimation results are saved in the [frame](https://www.stata.com/manuals/dframesintro.pdf) named "specurve".
+
+Use `frame change specurve` to check the results.
+
+Use `frame change default` to switch back to the original dataset.
+
 
 [^1]: Simonsohn, Uri and Simmons, Joseph P. and Nelson, Leif D., 2020, Specification Curve Analysis, _Nature Human Behaviour_.
 [^2]: Special thanks to [Rawley Heimer](https://www.bc.edu/bc-web/schools/carroll-school/faculty-research/faculty-directory/rawley-heimer.html) from Boston College who visited our discipline in 2019 and introduced the Specification Curve Analysis to us in the seminar on research methods.
