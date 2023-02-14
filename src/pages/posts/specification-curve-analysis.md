@@ -2,6 +2,8 @@
 layout: '../../layouts/BlogPost.astro'
 title: Specification Curve Analysis
 pubDate: Feb 11, 2021
+updatedDate: Feb 13, 2023
+heroImage: "https://github.com/mgao6767/specurve/raw/main/images/example1.png"
 ---
 
 ## Motivation
@@ -16,7 +18,7 @@ More often than not, empirical researchers need to argue that their chosen model
 
 The idea of specification curve is a direct answer to the question provided by Simonsohn, Simmons and Nelson (2020).[^1] [^2]
 
-To intuitively explain this concept, below is the Figure 2 from my recent paper [Organization Capital and Executive Performance Incentives](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3734710) on the _Journal of Banking & Finance_,[^3] which is used to show the robustness of an substitution effect of organization capital on executive pay-for-performance sensitivity. Therefore, the estimated coefficients for the variable of interest _OC_ are expected to be negative across different model specifications.
+To intuitively explain this concept, below is the Figure 2 from my paper [Organization Capital and Executive Performance Incentives](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3734710) on the _Journal of Banking & Finance_,[^3] which is used to show the robustness of an substitution effect of organization capital on executive pay-for-performance sensitivity. Therefore, the estimated coefficients for the variable of interest _OC_ are expected to be negative across different model specifications.
 
 ![specurve-of-oc](/images/specification-curve-of-oc.jpg)
 
@@ -45,39 +47,41 @@ Of course, even 32 models cannot exhaust _all_ possible specifications. Neverthe
 
 ## `specurve` - Stata command for specification curve analysis
 
-Since there was no available software or package to conduct specification curve analysis. I wrote myself a Stata command **`specurve`**, open-sourced at [github.com/mgao6767/specurve](https://github.com/mgao6767/specurve).
-
-### Dependencies
-
-[`specurve`](https://github.com/mgao6767/specurve) depends on Stata 16's Python integration and requires a Python version of 3.6 or above.
-
-Python modules required:
-
-- [`pandas`](https://pandas.pydata.org/): for basic dataset manipulation.
-- [`pyyaml`](https://pyyaml.org/): for reading and parsing the YAML-formatted configuration file.
-- [`plotly`](https://plotly.com/python/): for generating the specification curve plot.
-- [`kaleido`](https://github.com/plotly/Kaleido): for static image export with `plotly`.
-
-To install the required modules, try:
-
-``` bash
-pip install pandas pyyaml plotly kaleido
-```
+I developed a Stata command [**`specurve`**](https://github.com/mgao6767/specurve) for specification curve analysis. It is written in Stata Mata and has no external dependencies.[^4] The source code is available at [GitHub](https://github.com/mgao6767/specurve).
 
 ### Installation
 
-Download `specurve.ado` and `specurve.hlp` and put them in your personal ado folder. To find the path to your personal ado folder, type `adopath` in Stata.
+Run the following command in Stata:
 
-### Example usage
+```stata
+net install specurve, from("https://raw.githubusercontent.com/mgao6767/specurve/master") replace
+```
 
-The associated help file contains a step-by-step guide on using `specurve`. To open the help file, type `help specurve` in Stata after installation.
+### Example usage & output
 
-### Example output
+```stata
+. use "http://www.stata-press.com/data/r13/nlswork.dta", clear
+(National Longitudinal Survey.  Young Women 14-26 years of age in 1968)
+
+. copy "https://mingze-gao.com/specurve/example_config_nlswork_1.yml" ., replace
+
+. specurve using example_config_nlswork_1.yml, width(2) height(2.5) relativesize(0.5) saving(specurve_demo)
+[specurve] 22:11:02 - 40 total specifications to estimate.
+[specurve] 22:11:02 - Estimating model 1 of 40
+  ...
+[specurve] 22:11:04 - Estimating model 40 of 40
+[specurve] 22:11:04 - 37 out of 40 models have point estimates significant at 1% level.
+[specurve] 22:11:04 - 40 out of 40 models have point estimates significant at 5% level.
+[specurve] 22:11:04 - Plotting specification curve...
+(file specurve_demo.gph saved)
+[specurve] 22:11:04 - Completed.
+```
 
 ![example1](https://github.com/mgao6767/specurve/raw/main/images/example1.png)
 
-![example2](https://github.com/mgao6767/specurve/raw/main/images/example2.png)
+The associated help file contains a step-by-step guide on using [**`specurve`**](https://github.com/mgao6767/specurve). To open the help file, type `help specurve` in Stata after installation.
 
 [^1]: Simonsohn, Uri and Simmons, Joseph P. and Nelson, Leif D., 2020, Specification Curve Analysis, _Nature Human Behaviour_.
 [^2]: Special thanks to [Rawley Heimer](https://www.bc.edu/bc-web/schools/carroll-school/faculty-research/faculty-directory/rawley-heimer.html) from Boston College who visited our discipline in 2019 and introduced the Specification Curve Analysis to us in the seminar on research methods.
-[^3]: Gao, M. Leung, H. and Qiu, B. (2021). Organization Capital and Executive Performance Incentives, _Journal of Banking & Finance_, 123, 106017.
+[^3]: This plot was made using a previous version of [**`specurve`**](https://github.com/mgao6767/specurve).
+[^4]: Previous versions depend on Stata 16's Python integration.
