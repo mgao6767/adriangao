@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
+import Tag from '../components/Tag.astro'
 
 export interface Props {
   content: {
@@ -29,7 +30,7 @@ const {
   }
 } = Astro.props
 
-const { minutesRead } = Astro.props.frontmatter
+const { minutesRead, tags } = Astro.props.frontmatter
 ---
 
 <html lang="en">
@@ -77,8 +78,19 @@ const { minutesRead } = Astro.props.frontmatter
           }
           {!noReadingTime && <span>| {minutesRead}</span>}
         </div>
+        {
+        tags && (<div class="mt-1">Tags: 
+          {tags.map((tag) => <Tag name={tag} />)}
+          </div>)
+        }
         <hr />
         <slot />
+        <hr />
+        {
+          tags && (<div class="mt-1">Tags: 
+            {tags.map((tag) => <Tag name={tag} />)}
+            </div>)
+        }
       </article>
       {
         !noComment && (

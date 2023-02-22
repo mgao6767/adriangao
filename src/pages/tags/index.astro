@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allPosts = await Astro.glob('../posts/*.{md,mdx}')
+const noDraftPosts = allPosts.filter(post => !post.frontmatter.draft)
+const posts = noDraftPosts.sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
+)
+const alltags = posts.map((post) => post.frontmatter.tags).flat().filter(e=>e)
+const numAlltags = alltags.length
+const tags = [...new Set(alltags)];
+
+const tagWeight = (tag: string) => {
+  const nTag =alltags.filter(x=> x===tag).length 
+  return Math.round( nTag / numAlltags * 10)
+}
+
+const title = "Tags";
+---
+
+<BaseLayout title={title}>
+  <!-- <div class="tags">
+    {tags.map((tag) => (
+      <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
+    ))}
+  </div> -->
+  <!-- <h2>A cloud of tags...</h2> -->
+  <div class="txtcloud">
+    <ul class="cloud" role="navigation" aria-label="word cloud">
+      {
+        tags.map(( tag ) => (
+          <li>
+            <a data-weight={tagWeight(tag)} href={`/tags/${tag}`}>{tag}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>
+
+
+<!-- <style>
+  .tags {
+    display: flex; 
+    flex-wrap: wrap; 
+    margin: 0 auto;  
+  }
+
+  .tag {
+    margin: 0.1em;
+    border: dotted 1px #a1a1a1;
+    border-radius: .5em;
+    padding: .5em 1em;
+    font-size: 1em;
+    /* background-color: #F8FCFD; */
+  }
+</style> -->
+
+
+
+<style>
+  div.txtcloud {
+    justify-content: center;
+    align-items: center;
+    width: 100;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  ul.cloud {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    line-height: 2.75rem;
+    width: 90%;
+  }
+
+  ul.cloud a {
+    /*   
+    Not supported by any browser at the moment :(
+    --size: attr(data-weight number); 
+    */
+    --size: 4;
+    --color: #a33;
+    color: var(--color);
+    font-size: calc(var(--size) * 0.25rem + 0.5rem);
+    display: block;
+    padding: 0.125rem 0.25rem;
+    position: relative;
+    text-decoration: none;
+    opacity: calc((15 - (9 - var(--size))) / 15);
+  }
+
+  ul.cloud a[data-weight='1'] {
+    --size: 1;
+  }
+  ul.cloud a[data-weight='2'] {
+    --size: 2;
+  }
+  ul.cloud a[data-weight='3'] {
+    --size: 3;
+  }
+  ul.cloud a[data-weight='4'] {
+    --size: 4;
+  }
+  ul.cloud a[data-weight='5'] {
+    --size: 6;
+  }
+  ul.cloud a[data-weight='6'] {
+    --size: 8;
+  }
+  ul.cloud a[data-weight='7'] {
+    --size: 10;
+  }
+  ul.cloud a[data-weight='8'] {
+    --size: 13;
+  }
+  ul.cloud a[data-weight='9'] {
+    --size: 16;
+  }
+</style>
