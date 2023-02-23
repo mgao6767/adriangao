@@ -123,3 +123,101 @@ blockquote {
 .anticon {
   vertical-align: middle;
 }
+
+/* These applied to posts and tags */
+.title {
+  font-size: 2em;
+  margin: 0.25em 0 0;
+}
+hr {
+  border-top: 1px solid #ddd;
+  margin: 1rem 0;
+}
+ul {
+  @apply text-sm md:text-base;
+  list-style-type: none;
+  padding: unset;
+}
+ul li {
+  display: flex;
+}
+ul li time {
+  flex: 0 0 130px;
+  font-style: italic;
+  color: #595959;
+}
+ul li a:visited {
+  color: #8e32dc;
+}
+div.txtcloud {
+  justify-content: center;
+  align-items: center;
+  width: 100;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+ul.cloud {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  line-height: 2.75rem;
+  width: 90%;
+}
+ul.cloud a:visited {
+  color: #a33;
+}
+ul.cloud a {
+  /*   
+Not supported by any browser at the moment :(
+--size: attr(data-weight number); 
+*/
+  --size: 4;
+  --color: #a33;
+  color: var(--color);
+  font-size: calc(var(--size) * 0.25rem + 0.5rem);
+  display: block;
+  padding: 0.125rem 0.25rem;
+  position: relative;
+  text-decoration: none;
+  opacity: calc((15 - (9 - var(--size))) / 15);
+}
+
+ul.cloud a[data-weight='1'] {
+  --size: 1;
+  opacity: 0.5;
+}
+ul.cloud a[data-weight='2'] {
+  --size: 2;
+  opacity: 0.55;
+}
+ul.cloud a[data-weight='3'] {
+  --size: 3;
+  opacity: 0.6;
+}
+ul.cloud a[data-weight='4'] {
+  --size: 4;
+  opacity: 0.65;
+}
+ul.cloud a[data-weight='5'] {
+  --size: 5;
+  opacity: 0.7;
+}
+ul.cloud a[data-weight='6'] {
+  --size: 6;
+  opacity: 0.75;
+}
+ul.cloud a[data-weight='7'] {
+  --size: 7;
+  opacity: 0.8;
+}
+ul.cloud a[data-weight='8'] {
+  --size: 8;
+  opacity: 0.9;
+}
+ul.cloud a[data-weight='9'] {
+  --size: 12;
+}
