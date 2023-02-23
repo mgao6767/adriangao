@@ -3,6 +3,9 @@ layout: '../../layouts/BlogPost.astro'
 title: Minimum Variance Hedge Ratio
 pubDate: May 26, 2020
 hasTex: true
+tags:
+- Teaching note
+- math
 ---
 
 This note briefly explains what's the **minimum variance hedge ratio** and how

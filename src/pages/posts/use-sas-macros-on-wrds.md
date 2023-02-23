@@ -2,6 +2,10 @@
 layout: '../../layouts/BlogPost.astro'
 title: Use SAS Macros on WRDS
 pubDate: May 22, 2020
+tags:
+- SAS
+- Code
+- WRDS
 ---
 
 The [Wharton Research Data Services (WRDS)](https://wrds-www.wharton.upenn.edu/) provides quite a handful of SAS macros that can be used directly. This article explains how to use those handy macros on WRDS when you use remote submission to run your code on the WRDS cloud. Lastly, it explains how to load and use third-party SAS macros from a URL.

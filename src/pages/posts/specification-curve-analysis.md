@@ -4,6 +4,12 @@ title: Specification Curve Analysis
 pubDate: Feb 11, 2021
 updatedDate: Feb 13, 2023
 heroImage: "https://github.com/mgao6767/specurve/raw/main/images/example1.png"
+tags:
+- Stata
+- Code
+- Specification Curve
+- packages
+- Apps
 ---
 
 ## Motivation

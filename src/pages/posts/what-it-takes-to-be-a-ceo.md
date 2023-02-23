@@ -2,6 +2,9 @@
 layout: '../../layouts/BlogPost.astro'
 title: What it takes to be a CEO? A fun survey of literature.
 pubDate: May 22, 2020
+tags:
+- Literature
+- CEO
 ---
 
 

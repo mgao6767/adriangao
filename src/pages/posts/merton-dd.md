@@ -4,6 +4,11 @@ title: Estimate Merton Distance-to-Default
 description: SAS code to calculate Merton (1974) Distance-to-Default and default probability as in Bharath and Shumway (2008 RFS).
 pubDate: Nov 30, 2022
 hasTex: true
+tags:
+- SAS
+- Code
+- Merton
+- Default Probability
 ---
 
 Merton (1974) Distance to Default (DD) model is useful in forecasting defaults. This post documents a few ways to empirically estimate Merton DD (and default probability) as in Bharath and Shumway (2008 RFS).

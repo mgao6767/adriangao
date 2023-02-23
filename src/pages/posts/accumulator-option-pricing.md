@@ -7,6 +7,10 @@ hasTex: true
 heroImage: "/images/accumulator-95-105.png"
 tags:
 - Option Pricing
+- Accumulator
+- Simulation
+- Python
+- numba
 ---
 
 An [accumulator](https://en.wikipedia.org/wiki/Accumulator_(structured_product)) is a financial derivative that is sometimes known as "*I kill you later*". This post attempts to explain how it is structured and price it via Monte Carlo simulations in Python.

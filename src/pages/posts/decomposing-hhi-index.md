@@ -3,6 +3,9 @@ layout: '../../layouts/BlogPost.astro'
 title: Decomposing Herfindahl–Hirschman (HHI) Index
 pubDate: May 24, 2020
 hasTex: true
+tags:
+- HHI
+- math
 ---
 
 Herfindahl–Hirschman (HHI) Index is a well-known market concentration measure

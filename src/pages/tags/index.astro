@@ -1,5 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import Tag from "../../components/Tag.astro"
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
 
 const allPosts = await Astro.glob('../posts/*.{md,mdx}')
 const noDraftPosts = allPosts.filter(post => !post.frontmatter.draft)
@@ -60,16 +69,16 @@ const title = 'Tags'
 ---
 
 <BaseLayout title={title}>
-  <!-- <div class="tags">
-    {tags.map((tag) => (
-      <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
+  <div class="tags">
+    {tags.sort().map((tag) => (
+      <Tag name={tag} />
     ))}
-  </div> -->
-  <!-- <h2>A cloud of tags...</h2> -->
-  <div class="txtcloud">
+  </div>
+  <h2>A cloud of tags...</h2>
+  <div class="txtcloud mt-1">
     <ul class="cloud" role="navigation" aria-label="word cloud">
       {
-        tags.map(tag => (
+        shuffleArray(tags).map(tag => (
           <li>
             <a data-weight={tagWeight(tag)} href={`/tags/${tag}`}>
               {tag}
@@ -80,24 +89,6 @@ const title = 'Tags'
     </ul>
   </div>
 </BaseLayout>
-
-<!-- <style>
-  .tags {
-    display: flex; 
-    flex-wrap: wrap; 
-    margin: 0 auto;  
-  }
-
-  .tag {
-    margin: 0.1em;
-    border: dotted 1px #a1a1a1;
-    border-radius: .5em;
-    padding: .5em 1em;
-    font-size: 1em;
-    /* background-color: #F8FCFD; */
-  }
-</style> -->
-
 
 
 <style>

@@ -2,6 +2,10 @@
 layout: '../../layouts/BlogPost.astro'
 title: Never Use a Brain Wallet
 pubDate: May 29, 2019
+tags:
+- Bitcoin
+- Python
+- Code
 ---
 
 Among many reasons why people find it hard to use cryptocurrency there's a simple one -- memorising the private key is too hard. So, people invented **brain wallet**, which turns a string of words into a private key and thus wallet.

@@ -3,6 +3,8 @@ layout: '../../layouts/BlogPost.astro'
 title: Identify Chinese State-Owned Enterprise using CSMAR
 description: Identify Chinese State-Owned Enterprise using CSMAR
 pubDate: May 22, 2020
+tags:
+- CSMAR
 ---
 
 Many research papers on Chinese firms include a control variable that indicates if the firm is a state-owned enterprise (SOE). This is important as SOEs and non-SOEs differ in many aspects and may have structural differences. This post documents the way to construct this indicator variable from the CSMAR databases. 

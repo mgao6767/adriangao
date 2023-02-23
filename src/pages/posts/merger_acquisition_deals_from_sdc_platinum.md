@@ -2,6 +2,9 @@
 layout: '../../layouts/BlogPost.astro'
 title: Download M&A Deals from SDC Platinum
 pubDate: May 15, 2021
+tags:
+- M&A
+- SDC
 ---
 
 Thomson One Banker SDC Platinum database provides comprehensive M&A transaction data from early 1980s, and is perhaps the most widely used M&A database in the world.

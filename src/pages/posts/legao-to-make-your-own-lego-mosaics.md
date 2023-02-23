@@ -3,6 +3,8 @@ layout: '../../layouts/BlogPost.astro'
 title: LeGao to Make Your Own LEGO Mosaics
 pubDate: May 22, 2020
 updatedDate: Sep 29, 2022
+tags:
+- Apps
 ---
 
 I made an online app that turns a picture into a LEGO mosaic: [mingze-gao.com/legao](https://mingze-gao.com/legao).

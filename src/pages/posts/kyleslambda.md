@@ -4,6 +4,10 @@ title: Kyle's Lambda
 pubDate: May 26, 2020
 updatedDate: Jul 26, 2021
 hasTex: true
+tags:
+- Python
+- Code
+- Liquidity
 ---
 
 A measure of market impact cost from Kyle (1985), which can be interpreted as

@@ -2,6 +2,10 @@
 layout: '../../layouts/BlogPost.astro'
 title: Winsorization in SAS
 pubDate: May 26, 2020
+tags:
+- SAS
+- Code
+- WRDS
 ---
 
 These are two versions of winsorization in SAS, of which I recommend the first one.
