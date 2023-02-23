@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const allPosts = await Astro.glob('../posts/*.{md,mdx}')
 const noDraftPosts = allPosts.filter(post => !post.frontmatter.draft)
@@ -8,16 +8,55 @@ const posts = noDraftPosts.sort(
     new Date(b.frontmatter.pubDate).valueOf() -
     new Date(a.frontmatter.pubDate).valueOf()
 )
-const alltags = posts.map((post) => post.frontmatter.tags).flat().filter(e=>e)
+const alltags = posts
+  .map(post => post.frontmatter.tags)
+  .flat()
+  .filter(e => e)
 const numAlltags = alltags.length
-const tags = [...new Set(alltags)];
+const tags = [...new Set(alltags)]
 
-const tagWeight = (tag: string) => {
-  const nTag =alltags.filter(x=> x===tag).length 
-  return Math.round( nTag / numAlltags * 10)
+const kMostFrequent = function (nums: string[], k: number) {
+  if (nums.length == 0) return []
+  if (k > nums.length) return nums
+  nums.sort()
+  let grouped = nums.reduce((prev, curr) => {
+    if (prev.length > 0 && curr === prev[prev.length - 1][0]) {
+      prev[prev.length - 1].push(curr)
+    } else {
+      prev.push([curr])
+    }
+    return prev
+  }, [])
+
+  let lengths = grouped.map(lst => [lst.length, lst[0]])
+
+  lengths.sort((a, b) => {
+    return b[0] - a[0]
+  })
+
+  let mostFreq = []
+  for (let i = 0; i < k; i++) {
+    mostFreq.push(lengths[i][1])
+  }
+
+  return mostFreq
 }
 
-const title = "Tags";
+const k = Math.floor(numAlltags / 9)
+
+const tagWeight = (tag: string) => {
+  var tmp_tags = alltags
+  for (let i = 9; i > 1; i--) {
+    let ts = kMostFrequent(tmp_tags, k)
+    if (ts.includes(tag)) {
+      return i
+    }
+    tmp_tags = tmp_tags.filter(t => !ts.includes(t))
+  }
+  return 1
+}
+
+const title = 'Tags'
 ---
 
 <BaseLayout title={title}>
@@ -30,16 +69,17 @@ const title = "Tags";
   <div class="txtcloud">
     <ul class="cloud" role="navigation" aria-label="word cloud">
       {
-        tags.map(( tag ) => (
+        tags.map(tag => (
           <li>
-            <a data-weight={tagWeight(tag)} href={`/tags/${tag}`}>{tag}</a>
+            <a data-weight={tagWeight(tag)} href={`/tags/${tag}`}>
+              {tag}
+            </a>
           </li>
         ))
       }
     </ul>
   </div>
 </BaseLayout>
-
 
 <!-- <style>
   .tags {
@@ -99,29 +139,38 @@ const title = "Tags";
 
   ul.cloud a[data-weight='1'] {
     --size: 1;
+    opacity: 0.5;
   }
   ul.cloud a[data-weight='2'] {
     --size: 2;
+    opacity: 0.55;
   }
   ul.cloud a[data-weight='3'] {
     --size: 3;
+    opacity: 0.6;
   }
   ul.cloud a[data-weight='4'] {
     --size: 4;
+    opacity: 0.65;
   }
   ul.cloud a[data-weight='5'] {
     --size: 6;
+    opacity: 0.7;
   }
   ul.cloud a[data-weight='6'] {
     --size: 8;
+    opacity: 0.75;
   }
   ul.cloud a[data-weight='7'] {
     --size: 10;
+    opacity: 0.8;
   }
   ul.cloud a[data-weight='8'] {
     --size: 13;
+    opacity: 0.9;
   }
   ul.cloud a[data-weight='9'] {
     --size: 16;
+    opacity: 0.98;
   }
 </style>
