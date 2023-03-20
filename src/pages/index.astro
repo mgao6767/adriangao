@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
+import Stats from '../components/Stats.astro'
 ---
 
 <!DOCTYPE html>
@@ -94,7 +95,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
           </tbody>
         </table>
       </div>
-      <h2
+      <!-- <h2
         class="mt-4 text-lg font-bold mb-6 underline underline-offset-8 decoration-4 decoration-orange-900"
       >
         Click.
@@ -108,7 +109,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
         class="mx-1 text-sm rounded py-1 px-6 border border-transparent bg-gray-200 w-100 hover:bg-orange-900 hover:border-orange-900 hover:text-gray-100 transition ease-in-out duration-200"
         onclick="location.href='/reading-list'"
         type="button">Reading List</button
-      >
+      > -->
       <h2
         class="mt-8 text-lg font-bold mb-6 underline underline-offset-8 decoration-4 decoration-orange-900"
       >
@@ -123,7 +124,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
         <li>Office: Room 431, H69</li>
       </ul>
     </main>
-    <br />
+     <h2
+        class="mt-8 text-lg font-bold mb-1 underline underline-offset-8 decoration-4 decoration-orange-900"
+      >
+      Stats.
+      </h2>
+    <Stats />
     <Footer />
   </body>
 </html>
