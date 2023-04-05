@@ -1,19 +1,20 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import Tag from "../../components/Tag.astro"
 
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob('../posts/*.{md,mdx}')
+  const allPosts = await getCollection("posts");
   const uniqueTags = [
     ...new Set(
       allPosts
-        .map(post => post.frontmatter.tags).flat()
+        .map(post => post.data.tags).flat()
     )
   ]
 
   return uniqueTags.map(tag => {
     const filteredPosts = allPosts.filter(post =>
-      post.frontmatter.tags?.includes(tag)
+      post.data.tags?.includes(tag)
     )
     return {
       params: { tag },
@@ -23,15 +24,15 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.params
-const allPosts = await Astro.glob('../posts/*.{md,mdx}')
-const noDraftPosts = allPosts.filter(post => !post.frontmatter.draft)
+const allPosts = await getCollection("posts");
+const noDraftPosts = allPosts.filter(post => !post.data.draft)
 const posts = noDraftPosts.sort(
   (a, b) =>
-    new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf()
+    new Date(b.data.pubDate).valueOf() -
+    new Date(a.data.pubDate).valueOf()
 )
 const filteredPosts = posts.filter(post =>
-  post.frontmatter.tags?.includes(tag)
+  post.data.tags?.includes(tag)
 )
 ---
 
@@ -43,7 +44,7 @@ const filteredPosts = posts.filter(post =>
     {
       filteredPosts.map(post => (
         <li>
-          <a href={post.url}>{post.frontmatter.title}</a>
+          <a href={"/posts/"+ post.slug}>{post.data.title}</a>
         </li>
       ))
     }

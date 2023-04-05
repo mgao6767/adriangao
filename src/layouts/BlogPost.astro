@@ -4,33 +4,42 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import Tag from '../components/Tag.astro'
 
-export interface Props {
-  content: {
-    title: string
-    description: string
-    pubDate?: string
-    updatedDate?: string
-    heroImage?: string
-    hasTex?: boolean
-    noReadingTime?: boolean
-    noComment?: boolean
-  }
-}
+const { frontmatter } = Astro.props;
 
-const {
-  content: {
-    title,
+// export interface Props {
+//   content: {
+//     title: string
+//     description: string
+//     pubDate?: string
+//     updatedDate?: string
+//     heroImage?: string
+//     hasTex?: boolean
+//     noReadingTime?: boolean
+//     noComment?: boolean
+//   }
+// }
+
+// const {
+//   content: {
+//     title,
+//     description,
+//     pubDate,
+//     updatedDate,
+//     heroImage,
+//     hasTex,
+//     noReadingTime,
+//     noComment
+//   }
+// } = Astro.props
+
+const { minutesRead, tags, title,
     description,
     pubDate,
     updatedDate,
     heroImage,
     hasTex,
     noReadingTime,
-    noComment
-  }
-} = Astro.props
-
-const { minutesRead, tags } = Astro.props.frontmatter
+    noComment } = Astro.props.frontmatter
 ---
 
 <html lang="en">

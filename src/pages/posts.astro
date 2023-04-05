@@ -1,16 +1,16 @@
 ---
+import { getCollection } from "astro:content";
 import BaseHead from '../components/BaseHead.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
+import { SITE_DESCRIPTION } from '../config'
 
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const allPosts = await Astro.glob('./posts/*.{md,mdx}')
-const noDraftPosts = allPosts.filter((post) => !post.frontmatter.draft)
+const allPosts = await getCollection("posts");
+const noDraftPosts = allPosts.filter((post) => !post.data.draft)
 const posts = noDraftPosts.sort(
   (a, b) =>
-    new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf()
+    new Date(b.data.pubDate).valueOf() -
+    new Date(a.data.pubDate).valueOf()
 )
 ---
 
@@ -48,8 +48,8 @@ const posts = noDraftPosts.sort(
           {
             posts.map(post => (
               <li>
-                <time datetime={post.frontmatter.pubDate}>
-                  {new Date(post.frontmatter.pubDate).toLocaleDateString(
+                <time datetime={post.data.pubDate}>
+                  {new Date(post.data.pubDate).toLocaleDateString(
                     'en-us',
                     {
                       year: 'numeric',
@@ -58,7 +58,7 @@ const posts = noDraftPosts.sort(
                     }
                   )}
                 </time>
-                <a href={post.url}>{post.frontmatter.title}</a>
+                <a href={"posts/"+post.slug}>{post.data.title}</a>
               </li>
             ))
           }
