@@ -76,7 +76,7 @@ const posts = noDraftPosts.sort(
           {
             posts.map(post => {
               const [lang, slug] = post.slug.split('/')
-              let url = 'posts/' + slug
+              let url = '/posts/' + slug
               return (
                 <li>
                   <time datetime={post.data.pubDate}>
