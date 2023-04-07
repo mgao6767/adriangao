@@ -29,6 +29,10 @@ const posts = noDraftPosts.sort(
   (a, b) =>
     new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 )
+
+const years = [
+  ...new Set(posts.map(p => new Date(p.data.pubDate).getFullYear()))
+].sort((a, b) => b - a)
 ---
 
 <!DOCTYPE html>
@@ -45,8 +49,8 @@ const posts = noDraftPosts.sort(
         display: flex;
       }
       ul li time {
-        flex: 0 0 130px;
-        font-style: italic;
+        flex: 0 0 88px;
+        /* font-style: italic; */
         color: #595959;
       }
       ul li a:visited {
@@ -72,26 +76,40 @@ const posts = noDraftPosts.sort(
         </p>
       </section>
       <section>
-        <ul>
-          {
-            posts.map(post => {
-              const [lang, slug] = post.slug.split('/')
-              let url = '/posts/' + slug
-              return (
-                <li>
-                  <time datetime={post.data.pubDate}>
-                    {new Date(post.data.pubDate).toLocaleDateString('en-us', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric'
+        {
+          years.map(year => {
+            return (
+              <div>
+                <h2 class="text-lg font-bold mb-6 underline underline-offset-8 decoration-4 decoration-orange-900">
+                  {year}
+                </h2>
+                <ul>
+                  {posts
+                    .filter(p => new Date(p.data.pubDate).getFullYear() == year)
+                    .map(post => {
+                      const [lang, slug] = post.slug.split('/')
+                      let url = '/posts/' + slug
+                      return (
+                        <li>
+                          <time datetime={post.data.pubDate}>
+                            {new Date(post.data.pubDate).toLocaleDateString(
+                              'en-us',
+                              {
+                                // year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                              }
+                            )}
+                          </time>
+                          <a href={url}>{post.data.title}</a>
+                        </li>
+                      )
                     })}
-                  </time>
-                  <a href={url}>{post.data.title}</a>
-                </li>
-              )
-            })
-          }
-        </ul>
+                </ul>
+              </div>
+            )
+          })
+        }
       </section>
     </main>
     <Footer />
