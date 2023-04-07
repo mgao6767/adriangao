@@ -9,7 +9,8 @@ changeLanguage('en')
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts')
   const uniqueTags = [...new Set(allPosts.map(post => post.data.tags).flat())]
-  return uniqueTags.map(tag => {
+  const tagsNoUndefined = uniqueTags.filter(Boolean)
+  return tagsNoUndefined.map(tag => {
     const filteredPosts = allPosts.filter(post => post.data.tags?.includes(tag))
     return {
       params: { tag },
