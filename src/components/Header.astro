@@ -1,6 +1,14 @@
 ---
 import HeaderLink from './HeaderLink.astro'
 import { SITE_TITLE } from '../config'
+import { LanguageSelector } from 'astro-i18next/components'
+import { TranslationOutlined } from '@ant-design/icons'
+
+const currentPath = Astro.url.pathname
+const isHomePage =
+  currentPath === '/' || currentPath === '/zh' || currentPath === '/zh/'
+
+const { hasTranslation } = Astro.props
 ---
 
 <header>
@@ -17,6 +25,16 @@ import { SITE_TITLE } from '../config'
     <!-- <HeaderLink href="https://github.com/mgao6767" target="_blank"
       >GitHub</HeaderLink
     > -->
+    <!-- {
+      (isHomePage || hasTranslation) && (
+        <>
+          <i style="display: inline-block;">
+            <TranslationOutlined />
+          </i>
+          <LanguageSelector showFlag={false} class="language-selector" />
+        </>
+      )
+    } -->
   </nav>
 </header>
 <style>

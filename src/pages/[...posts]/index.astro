@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content'
+import BaseHead from '../../components/BaseHead.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import { SITE_DESCRIPTION } from '../../config'
+import i18next, { changeLanguage } from 'i18next'
+
+export function getStaticPaths() {
+  return i18next.languages.map(lang => {
+    return {
+      params: {
+        posts: lang === 'en' ? 'posts' : `${lang}/posts`
+      },
+      props: {
+        lang
+      }
+    }
+  })
+}
+const { lang } = Astro.props
+changeLanguage(lang)
+
+const allPosts = await getCollection('posts', ({ id }) => {
+  return id.startsWith(`${lang}/`)
+})
+const noDraftPosts = allPosts.filter(post => !post.data.draft)
+const posts = noDraftPosts.sort(
+  (a, b) =>
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+)
+---
+
+<!DOCTYPE html>
+<html lang={i18next.language}>
+  <head>
+    <BaseHead title="Blog" description={SITE_DESCRIPTION} />
+    <style>
+      ul {
+        @apply text-sm md:text-base;
+        list-style-type: none;
+        padding: unset;
+      }
+      ul li {
+        display: flex;
+      }
+      ul li time {
+        flex: 0 0 130px;
+        font-style: italic;
+        color: #595959;
+      }
+      ul li a:visited {
+        color: #8e32dc;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <p>
+          See <a href="/tags/">a cloud of tags</a> of my posts <a
+            href="/rss.xml"
+            ><img
+              style="display:inline; vertical-align:text-top;"
+              alt="rss"
+              src="/rss.svg"
+              width="14"
+              height="14"
+            /></a
+          >
+        </p>
+      </section>
+      <section>
+        <ul>
+          {
+            posts.map(post => {
+              const [lang, slug] = post.slug.split('/')
+              let url = 'posts/' + slug
+              return (
+                <li>
+                  <time datetime={post.data.pubDate}>
+                    {new Date(post.data.pubDate).toLocaleDateString('en-us', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <a href={url}>{post.data.title}</a>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

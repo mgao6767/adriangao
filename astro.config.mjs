@@ -9,11 +9,12 @@ import rehypeKatex from 'rehype-katex'
 import remarkPrism from 'remark-prism'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 import remarkToc from 'remark-toc'
+import astroI18next from 'astro-i18next'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mingze-gao.com/',
-  integrations: [mdx(), sitemap(), tailwind(), react()],
+  integrations: [mdx(), sitemap(), tailwind(), react(), astroI18next()],
   // https://github.com/natemoo-re/astro-icon/issues/2
   vite: {
     ssr: {

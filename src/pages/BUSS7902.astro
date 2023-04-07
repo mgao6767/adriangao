@@ -1,5 +1,8 @@
 ---
-import Redirect from '../components/Redirect.astro'
+import { changeLanguage } from "i18next";
+import Redirect from "../components/Redirect.astro";
+
+changeLanguage("en");
 ---
 
 <Redirect redirectTo="https://github.com/mgao6767/BUSS7902/archive/refs/heads/main.zip" />

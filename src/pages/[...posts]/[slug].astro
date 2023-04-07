@@ -1,0 +1,34 @@
+---
+import { getCollection, CollectionEntry } from 'astro:content'
+import { changeLanguage } from 'i18next'
+import BlogPost from '../../layouts/BlogPost.astro'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts')
+  return posts.map(entry => {
+    const [lang, slug] = entry.slug.split('/')
+    return {
+      params: {
+        posts: lang === 'en' ? 'posts' : `${lang}/posts`,
+        slug
+      },
+      props: { entry, lang }
+    }
+  })
+}
+type Props = {
+  entry: CollectionEntry<'posts'>
+  lang: string
+}
+const { entry, lang } = Astro.props
+const { Content, remarkPluginFrontmatter } = await entry.render()
+
+changeLanguage(lang)
+---
+
+<BlogPost
+  frontmatter={entry.data}
+  minutesRead={remarkPluginFrontmatter.minutesRead}
+>
+  <Content />
+</BlogPost>

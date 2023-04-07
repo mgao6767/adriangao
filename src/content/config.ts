@@ -10,6 +10,7 @@ const postsCollection = defineCollection({
     pubDate: z.string(),
     updatedDate: z.string().optional(),
     hasTex: z.boolean().optional(),
+    hasTranslation: z.boolean().optional(),
     noReadingTime: z.boolean().optional(),
     noComment: z.boolean().optional(),
     draft: z.boolean().optional()

@@ -4,10 +4,13 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
 import Stats from '../components/Stats.astro'
+import i18next, { t, changeLanguage } from 'i18next'
+
+changeLanguage('en')
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={i18next.language}>
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
@@ -28,31 +31,44 @@ import Stats from '../components/Stats.astro'
       <h2
         class="text-lg font-bold mb-6 underline underline-offset-8 decoration-4 decoration-orange-900"
       >
-        Bio.
+        {t('home.bio')}
       </h2>
       <p>
-        
-        <strong>Mingze Gao</strong> <a href="https://orcid.org/0000-0002-8635-4269"><img style="display:inline; vertical-align:text-top;" alt="ORCID logo" src="/ORCIDiD_iconvector.svg" width="15" height="15" /></a>
-        , aka <a style="color: #000;" href="https://adrian-gao.com">
-        Adrian</a>, is a <span class="text-orange-900 font-bold">Postdoctoral Research Fellow</span
+        <strong>Mingze Gao</strong>
+        <a href="https://orcid.org/0000-0002-8635-4269"
+          ><img
+            style="display:inline; vertical-align:text-top;"
+            alt="ORCID logo"
+            src="/ORCIDiD_iconvector.svg"
+            width="15"
+            height="15"
+          /></a
+        >
+        , aka <a style="color: #000;" href="https://adrian-gao.com"> Adrian</a>,
+        is a <span class="text-orange-900 font-bold"
+          >Postdoctoral Research Fellow</span
         > at the University of Sydney Business School, where he received a Ph.D.
         in Finance, a B.Com (Hon) in Finance and a B.Com in Econometrics and Finance.
       </p>
       <p>
-        With a focus on banking and corporate finance, his work has been published at the <span
-          class="italic font-semibold text-orange-900"
-        >
+        With a focus on banking and corporate finance, his work has been
+        published at the <span class="italic font-semibold text-orange-900">
           Journal of Banking & Finance</span
-        >,
-        and/or presented at WFA Annual Meeting (sched), FMA Annual Meeting, FIRN Annual
-        Meeting, FIRN Banking and Financial Stability Meeting, etc.
+        >, and/or presented at WFA Annual Meeting (sched), FMA Annual Meeting,
+        FIRN Annual Meeting, FIRN Banking and Financial Stability Meeting, etc.
       </p>
       <p>
-        Mingze has a strong background in programming and received First Prize in the 2010 National Olympiad in Informatics in Provinces (NOIP).
-        His PhD thesis involves large-scale textual analysis and novel machine learning application, 
-        leading to a <a href="http://purl.org/au-research/grants/arc/DP210102611">$500,000 grant</a> 
-        from the Australian Research Council (ARC) Discovery Project financing his postdoctoral fellowship.
-        He is also studying computer science, e.g., database, crypto and distributed ledger technology, at the University of New South Wales with High Distinction.
+        Mingze has a strong background in programming and received First Prize
+        in the 2010 National Olympiad in Informatics in Provinces (NOIP). His
+        PhD thesis involves large-scale textual analysis and novel machine
+        learning application, leading to a <a
+          href="http://purl.org/au-research/grants/arc/DP210102611"
+          >$500,000 grant</a
+        >
+        from the Australian Research Council (ARC) Discovery Project financing his
+        postdoctoral fellowship. He is also studying computer science, e.g., database,
+        crypto and distributed ledger technology, at the University of New South
+        Wales with High Distinction.
       </p>
       <!-- <p>
         He now works on the Australian Research Council (ARC) Discovery Project
@@ -63,7 +79,7 @@ import Stats from '../components/Stats.astro'
         <h2
           class="text-lg font-bold mb-6 underline underline-offset-8 decoration-4 decoration-orange-900"
         >
-          Edu.
+          {t('home.edu')}
         </h2>
         <table class="table-auto shadow-none text-base">
           <tbody>
@@ -124,11 +140,11 @@ import Stats from '../components/Stats.astro'
         <li>Office: Room 431, H69</li>
       </ul>
     </main>
-     <h2
-        class="mt-8 text-lg font-bold mb-1 underline underline-offset-8 decoration-4 decoration-orange-900"
-      >
+    <h2
+      class="mt-8 text-lg font-bold mb-1 underline underline-offset-8 decoration-4 decoration-orange-900"
+    >
       Stats.
-      </h2>
+    </h2>
     <Stats />
     <Footer />
   </body>

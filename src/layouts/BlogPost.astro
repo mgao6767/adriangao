@@ -3,46 +3,28 @@ import BaseHead from '../components/BaseHead.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import Tag from '../components/Tag.astro'
+import i18next from 'i18next'
+import { LanguageSelector } from 'astro-i18next/components'
+import { TranslationOutlined } from '@ant-design/icons'
 
-const { frontmatter } = Astro.props;
+const {
+  // minutesRead,
+  tags,
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  hasTex,
+  hasTranslation,
+  noReadingTime,
+  noComment
+} = Astro.props.frontmatter
 
-// export interface Props {
-//   content: {
-//     title: string
-//     description: string
-//     pubDate?: string
-//     updatedDate?: string
-//     heroImage?: string
-//     hasTex?: boolean
-//     noReadingTime?: boolean
-//     noComment?: boolean
-//   }
-// }
-
-// const {
-//   content: {
-//     title,
-//     description,
-//     pubDate,
-//     updatedDate,
-//     heroImage,
-//     hasTex,
-//     noReadingTime,
-//     noComment
-//   }
-// } = Astro.props
-
-const { minutesRead, tags, title,
-    description,
-    pubDate,
-    updatedDate,
-    heroImage,
-    hasTex,
-    noReadingTime,
-    noComment } = Astro.props.frontmatter
+const { minutesRead } = Astro.props
 ---
 
-<html lang="en">
+<html lang={i18next.language}>
   <head>
     <BaseHead title={title} description={description} />
     <style>
@@ -88,17 +70,38 @@ const { minutesRead, tags, title,
           {!noReadingTime && <span>| {minutesRead}</span>}
         </div>
         {
-        tags && (<div class="mt-1">Tags: 
-          {tags.map((tag) => <Tag name={tag} />)}
-          </div>)
+          tags && (
+            <div class="mt-1">
+              Tags:
+              {tags.map(tag => (
+                <Tag name={tag} />
+              ))}
+            </div>
+          )
+        }
+        {
+          hasTranslation && (
+            <div class="mt-1">
+              <i style="display: inline-block;">
+                <TranslationOutlined />
+              </i>
+              Translation is available:
+              <LanguageSelector showFlag={true} class="language-selector" />
+            </div>
+          )
         }
         <hr />
         <slot />
         <hr />
         {
-          tags && (<div class="mt-1">Tags: 
-            {tags.map((tag) => <Tag name={tag} />)}
-            </div>)
+          tags && (
+            <div class="mt-1">
+              Tags:
+              {tags.map(tag => (
+                <Tag name={tag} />
+              ))}
+            </div>
+          )
         }
       </article>
       {

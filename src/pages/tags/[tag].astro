@@ -1,39 +1,31 @@
 ---
-import { getCollection } from "astro:content";
+import { changeLanguage } from 'i18next'
+import { getCollection } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import Tag from "../../components/Tag.astro"
+import Tag from '../../components/Tag.astro'
+
+changeLanguage('en')
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("posts");
-  const uniqueTags = [
-    ...new Set(
-      allPosts
-        .map(post => post.data.tags).flat()
-    )
-  ]
-
+  const allPosts = await getCollection('posts')
+  const uniqueTags = [...new Set(allPosts.map(post => post.data.tags).flat())]
   return uniqueTags.map(tag => {
-    const filteredPosts = allPosts.filter(post =>
-      post.data.tags?.includes(tag)
-    )
+    const filteredPosts = allPosts.filter(post => post.data.tags?.includes(tag))
     return {
       params: { tag },
       props: { posts: filteredPosts }
     }
   })
 }
-
 const { tag } = Astro.params
-const allPosts = await getCollection("posts");
+const allPosts = await getCollection('posts')
 const noDraftPosts = allPosts.filter(post => !post.data.draft)
 const posts = noDraftPosts.sort(
   (a, b) =>
-    new Date(b.data.pubDate).valueOf() -
-    new Date(a.data.pubDate).valueOf()
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 )
-const filteredPosts = posts.filter(post =>
-  post.data.tags?.includes(tag)
-)
+const filteredPosts = posts.filter(post => post.data.tags?.includes(tag))
+const postsInEnglish = filteredPosts.filter(post => post.slug.startsWith('en'))
 ---
 
 <BaseLayout title={tag} description={`Posts tagged with ${tag}`}>
@@ -42,15 +34,15 @@ const filteredPosts = posts.filter(post =>
   </p>
   <ul>
     {
-      filteredPosts.map(post => (
+      postsInEnglish.map(post => (
         <li>
-          <a href={"/posts/"+ post.slug}>{post.data.title}</a>
+          <a href={'/posts/' + post.slug.split('/')[1]}>{post.data.title}</a>
         </li>
       ))
     }
   </ul>
-  <br>
-  <hr>
+  <br />
+  <hr />
   <p><a href="/tags/">All tags</a> | <a href="/posts/">All posts</a></p>
-  <hr>
+  <hr />
 </BaseLayout>

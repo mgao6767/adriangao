@@ -1,72 +1,66 @@
 ---
+import { changeLanguage } from "i18next";
 import { getCollection } from "astro:content";
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import Tag from "../../components/Tag.astro"
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tag from "../../components/Tag.astro";
+
+changeLanguage("en");
 
 function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
-  }
-  return array
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
-
 const allPosts = await getCollection("posts");
-const noDraftPosts = allPosts.filter(post => !post.data.draft)
-const posts = noDraftPosts.sort(
-  (a, b) =>
-    new Date(b.data.pubDate).valueOf() -
-    new Date(a.data.pubDate).valueOf()
-)
+const noDraftPosts = allPosts.filter(post => !post.data.draft);
+const posts = noDraftPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() -
+    new Date(a.data.pubDate).valueOf());
 const alltags = posts
-  .map(post => post.data.tags)
-  .flat()
-  .filter(e => e)
-const numAlltags = alltags.length
-const tags = [...new Set(alltags)]
-
+    .map(post => post.data.tags)
+    .flat()
+    .filter(e => e);
+const numAlltags = alltags.length;
+const tags = [...new Set(alltags)];
 const kMostFrequent = function (nums: string[], k: number) {
-  if (nums.length == 0) return []
-  if (k > nums.length) return nums
-  nums.sort()
-  let grouped = nums.reduce((prev, curr) => {
-    if (prev.length > 0 && curr === prev[prev.length - 1][0]) {
-      prev[prev.length - 1].push(curr)
-    } else {
-      prev.push([curr])
+    if (nums.length == 0)
+        return [];
+    if (k > nums.length)
+        return nums;
+    nums.sort();
+    let grouped = nums.reduce((prev, curr) => {
+        if (prev.length > 0 && curr === prev[prev.length - 1][0]) {
+            prev[prev.length - 1].push(curr);
+        }
+        else {
+            prev.push([curr]);
+        }
+        return prev;
+    }, []);
+    let lengths = grouped.map(lst => [lst.length, lst[0]]);
+    lengths.sort((a, b) => {
+        return b[0] - a[0];
+    });
+    let mostFreq = [];
+    for (let i = 0; i < k; i++) {
+        mostFreq.push(lengths[i][1]);
     }
-    return prev
-  }, [])
-
-  let lengths = grouped.map(lst => [lst.length, lst[0]])
-
-  lengths.sort((a, b) => {
-    return b[0] - a[0]
-  })
-
-  let mostFreq = []
-  for (let i = 0; i < k; i++) {
-    mostFreq.push(lengths[i][1])
-  }
-
-  return mostFreq
-}
-
-const k = Math.floor(numAlltags / 9)
-
+    return mostFreq;
+};
+const k = Math.floor(numAlltags / 9);
 const tagWeight = (tag: string) => {
-  var tmp_tags = alltags
-  for (let i = 9; i > 1; i--) {
-    let ts = kMostFrequent(tmp_tags, k)
-    if (ts.includes(tag)) {
-      return i
+    var tmp_tags = alltags;
+    for (let i = 9; i > 1; i--) {
+        let ts = kMostFrequent(tmp_tags, k);
+        if (ts.includes(tag)) {
+            return i;
+        }
+        tmp_tags = tmp_tags.filter(t => !ts.includes(t));
     }
-    tmp_tags = tmp_tags.filter(t => !ts.includes(t))
-  }
-  return 1
-}
-
-const title = 'Tags'
+    return 1;
+};
+const title = "Tags";
 ---
 
 <BaseLayout title={title}>

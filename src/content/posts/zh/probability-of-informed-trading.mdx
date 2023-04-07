@@ -1,0 +1,180 @@
+---
+title: Probability of Informed Trading (PIN)
+pubDate: April 5, 2023
+heroImage: /images/probability-of-informed-trading-on-binance.png
+hasTex: true
+hasTranslation: true
+tags:
+- PIN
+- Informed Trading
+---
+
+import Aside from '../../../components/Aside.astro'
+
+<Aside type="note">
+这是一篇我2018年3月发在公众号的文章。上图是根据我在2019年收集的Binance上的交易数据计算的PIN。
+</Aside>
+
+市场微观结构里，Easley et. al. (1996) 提出了一个可以解构买卖价差（Bid-Ask Spread）的交易模型。这个模型最令人称道的地方在于其提出了“Probability of Informed Trading”，PIN，这个可以用来分析价差中信息成分的测量手段。顾名思义，PIN在理想情况下的一个做市商报价市场里可以反映出知情交易的概率。这篇文章里我试着梳理了Easley et. al. (1996) 论文里的建模过程，以及在实证中如何处理最大似然估计时的目标函数以回避计算时的溢出错误。
+
+## Table of Contents
+
+## 模型
+
+假设知情交易者和不知情交易者的买卖订单均服从独立的泊松过程，然后下面的树状图描述了整个交易流程：
+
+![theoretical-model-of-pin](/images/theoretical-model-of-pin.jpg)
+
+- 在每个交易日有$P=\alpha$的概率出现新的信息，以及显然的$P=(1-\alpha)$的概率没有新的信息。
+- 出现的新信息有$P=\delta$的概率是利空的，以及$P=(1-\delta)$的概率为利好。
+  - 如果是利空的消息，那么当天的买单的抵达率为$\varepsilon$，卖单抵达率为$(\varepsilon+\mu)$。
+  - 如果是利好的消息，那么当天的买单的抵达率为$(\varepsilon+\mu)$，卖单抵达率为$\varepsilon$。
+- 没有新信息的时候，当天的买单和买单抵达率均为$\varepsilon$。
+
+## 交易过程
+
+接下来，假设做市商是一个贝叶斯主义者，也就是说他会通过观察交易、交易率等来更新他对于整个市场状态的认识，尤其是关于当天是否有新的信息出现的判断。假设每个交易日都是独立的，$P(t)=(P_n(t), P_b(t), P_g(t))$是做市商的先验概率认知，其中$n$代表没有新信息、$b$代表利空的坏消息、$g$代表利好的好消息，那么$P(t)=(1-\alpha, \alpha\delta, \alpha(1-\delta))$。
+
+记$S_t$为在$t$时刻有一个卖单到达的事件，$B_t$为在$t$时刻有一个买单到达的事件，同时记$P(t|S_t)$为做市商观察到一个卖单在$t$时刻到达后根据既有信息更新过的概率认识。那么根据贝叶斯法则，如果在$t$时刻没有新信息到达且做市商观察到一个卖单，那么后验概率$P_n(t|S_t)$应为：
+
+$$
+\begin{equation} P_n(t|S_t)=\frac{P_n(t)\varepsilon}{\varepsilon+P_b(t)\mu}\end{equation}
+$$
+
+同样的，如果有利空信息且在$t$时刻做市商观察到一个卖单，那么后验概率$P_b(t|S_t)$应为：
+
+$$
+\begin{equation} P_b(t|S_t)=\frac{P_b(t)(\varepsilon+\mu)}{\varepsilon+P_b(t)\mu}\end{equation}
+$$
+
+如果有利好信息且在$t$时刻做市商观察到一个卖单，那么后验概率$P_g(t|S_t)$应为：
+
+$$
+\begin{equation} P_g(t|S_t)=\frac{P_g(t)\varepsilon}{\varepsilon+P_b(t)\mu}\end{equation}
+$$
+
+这样，在$i$天的$t$时刻的零期望利润bid价格应为做市商基于历史信息和在此时观察到卖单的条件下的对资产价值的条件期望，即，
+
+$$
+\begin{equation} b(t)=\frac{P_n(t)\varepsilon V^*_i+P_b(t)(\varepsilon+\mu)\underline{V}_i+P_g(t)\varepsilon\overline{V}_i}{\varepsilon+P_b(t)\mu}\end{equation}
+$$
+
+其中，$V_i$是该资产在$i$天结束时的价值，并且设有利好消息时候的资产价值为$\overline{V}_i$，有利空消息时的资产价值为$\underline{V}_i$，无消息时的资产价值为$V^*_i$，并且$\underline{V}_i<V^*_i<\overline{V}_i$。
+
+而这时候的ask价格应为：
+
+$$
+\begin{equation} a(t)=\frac{P_n(t)\varepsilon V^*_i+P_b(t)\varepsilon\underline{V}_i+P_g(t)(\varepsilon+\mu)\overline{V}_i}{\varepsilon+P_g(t)\mu}\end{equation}
+$$
+
+这里我们最好把这些bid、ask与在$t$时刻的资产价值期望联系起来。考虑到此时的资产价值条件期望为：
+
+$$
+\begin{equation} E[V_i|t]=P_n(t)V^*_i+P_b(t)\underline{V}_i+P_g(t)\overline{V}_i\end{equation}
+$$
+
+我们可以把上述的$b(t)$和$a(t)$写为：
+
+$$
+\begin{equation} b(t)=E[V_i|t]-\frac{\mu P_b(t)}{\varepsilon+\mu P_b(t)}(E[V_i|t]-\underline{V}_i)\end{equation}
+$$
+
+$$
+\begin{equation} a(t)=E[V_i|t]+\frac{\mu P_g(t)}{\varepsilon+\mu P_g(t)}(\overline{V}_i-E[V_i|t])\end{equation}
+$$
+
+于是，bid-ask spread就是$a(t)-b(t)$，即：
+
+$$
+\begin{equation} a(t)-b(t)=\frac{\mu P_g(t)}{\varepsilon+\mu P_g(t)}(\overline{V}_i-E[V_i|t])+\frac{\mu P_b(t)}{\varepsilon+\mu P_b(t)}(E[V_i|t]-\underline{V}_i)\end{equation}
+$$
+
+这说明，在$t$时刻的bid-ask spread实际上是：
+
+> 买单为知情交易的概率$\times$因知情买方的损失期望+卖单为知情交易的概率$\times$因知情卖方的损失期望
+
+因此，$t$时刻任意交易是基于知情者的不对称信息的概率就是这两个概率的和：
+
+$$
+\begin{equation} PIN(t)=\frac{\mu P_g(t)}{\varepsilon+\mu P_g(t)}+\frac{\mu P_b(t)}{\varepsilon+\mu P_b(t)}=\frac{\mu(1-P_n(t))}{\mu(1-P_n(t))+2\varepsilon}\end{equation}
+$$
+
+而如果没有信息会发生（$P_n(t)=1$），或者没有知情交易（$\mu=0$），$PIN$和bid-ask spread都应该为零。如果利好和利空消息的概率是相等的，即$\delta=1-\delta$，那么bid-ask spread可以简化为：
+
+$$
+\begin{equation} a(t)-b(t)=\frac{\alpha\mu}{\alpha\mu+2\varepsilon}[\overline{V}_i-\underline{V}_i]\end{equation}
+$$
+
+而我们的$PIN$也简化为了
+
+$$
+\begin{equation} PIN(t)=\frac{\alpha\mu}{\alpha\mu+2\varepsilon}\end{equation}
+$$
+
+## 模型估计
+
+建模之后我们来聊一聊这个模型的参数估计。我们要估计的参数$\theta=(\alpha, \delta, \varepsilon, \mu)$实际上非常地不容易估计，这是因为我们并不能直接观察，而只能观察到买单和卖单的陆续抵达。在这个模型里，每天的买卖单都假设服从三种泊松过程中的一种。虽然我们不知道具体是哪一种过程，但总的想法是：更多的买单意味着潜在的利好消息，更多的卖单意味着潜在的利空消息，而没有新信息的时候总体的买卖都会减小。沿着这个想法出发，我们可以使用最大似然估计来尝试估算$\theta$。
+
+首先，按照图示的交易模型，假设某日有利空消息，那么卖单的抵达率为$(\mu+\varepsilon)$，也即知情和不知情的交易者都参与到出售中，而买单的抵达率为$\varepsilon$，即只有不知情的交易者会继续买入。因此，在一段时间内观察到任意序列的成交中出现了$B$次买入和$S$次卖出的概率为：
+
+$$
+\begin{equation} e^{-\varepsilon} \frac{\varepsilon^B}{B!} e^{-(\mu+\varepsilon)} \frac{(\mu+\varepsilon)^S}{S!}\end{equation}
+$$
+
+若某日有利好消息，则在一段时间内观察到任意序列的成交中出现了$B$次买入和$S$次卖出的概率为：
+
+$$
+\begin{equation} e^{-\varepsilon} \frac{\varepsilon^B}{B!} e^{-\varepsilon} \frac{\varepsilon^S}{S!}\end{equation}
+$$
+
+若某日无新信息，则在一段时间内观察到任意序列的成交中出现了$B$次买入和$S$次卖出的概率为：
+
+$$
+\begin{equation} e^{-(\mu+\varepsilon)} \frac{(\mu+\varepsilon)^B}{B!} e^{-\varepsilon} \frac{\varepsilon^S}{S!}\end{equation}
+$$
+
+所以，在该交易日里总共观察到$B$次买入和$S$次卖出的概率就应该上上述三种可能性的加权平均值，并且这里的权重是这三种可能性的各自概率。于是我们可以写出似然函数：
+
+$$
+\begin{align}
+
+L((B, S)| \theta)=  &(1-\alpha)e^{-\varepsilon} \frac{\varepsilon^B}{B!} e^{-\varepsilon} \frac{\varepsilon^S}{S!} \\
+
+                                                                         &+ \alpha\delta  e^{-\varepsilon} \frac{\varepsilon^B}{B!} e^{-(\mu+\varepsilon)} \frac{(\mu+\varepsilon)^S}{S!} \\
+
+                                                                          &+ \alpha(1-\delta) e^{-(\mu+\varepsilon)} \frac{(\mu+\varepsilon)^B}{B!} e^{-\varepsilon} \frac{\varepsilon^S}{S!}
+
+\end{align}
+$$
+
+于是，最大似然估计的目标函数即为：
+
+$$
+\begin{equation}
+
+L(D|\theta)=\prod_{i=1}^{N}L(\theta|(B_i, S_i))
+
+\end{equation}
+$$
+
+## Bottomline
+
+问题到这里似乎就结束了，有了目标函数，只要编程一下、注意一下参数的界限，仿佛就完事了。不过接下来才是重头戏，因为你真的这样写目标函数并且去跑的话，必然会发现overflow的报错。毕竟这个函数里充斥着次方和阶乘，即使时间元选择的特别小，某些流动性极高的资产依然会在几秒钟内出现几百单成交，于是不管是$B!$、还是$S!$、还是$(\mu+\varepsilon)^B$，统统可以华丽地让你的程序崩溃。所以这里对目标函数的进一步处理就是极其的重要了。
+
+观察一下方程（16），似然函数中的三项其实可以提取一个公因式$e^{-2\varepsilon}(\mu+\varepsilon)^{B+S}/(B!S!)$！提取这个公因式后，还可以将$x\equiv \frac{\varepsilon}{\mu+\varepsilon}\in [0, 1]$带入其中。经过变换后的似然函数再取对数以后形为：
+
+$$
+\begin{align}
+
+l((B, S)| \theta)=&\ln(L((B, S)| \theta))\\
+
+&=-2\varepsilon+(B+S)\ln(\mu+\varepsilon) \\
+
+&+\ln((1-\alpha)x^{B+S}+\alpha\delta e^{-\mu}x^B + \alpha(1-\delta)e^{-\mu}x^S) \\
+
+&-\ln(B!S!)
+
+\end{align}
+$$
+
+此时，由于最后一项$\ln(B!S!)$完全不影响参数估计所以可以排除，剩下的部分基本可以完美地规避溢出。我个人觉得这里的神来之笔是在于$x\equiv \frac{\varepsilon}{\mu+\varepsilon}\in [0, 1]$，这个带入防止了由于$(\mu+\varepsilon)>1$而导致的溢出错误。
