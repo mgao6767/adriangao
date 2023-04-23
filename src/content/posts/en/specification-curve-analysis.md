@@ -73,15 +73,6 @@ net install specurve, from("https://raw.githubusercontent.com/mgao6767/specurve/
 . copy "https://mingze-gao.com/specurve/example_config_nlswork_reghdfe.yml" ., replace
 
 . specurve using example_config_nlswork_reghdfe.yml, saving(specurve_demo)
-[specurve] 11:33:54 - 72 total specifications to estimate.
-[specurve] 11:33:54 - Estimating model 1 of 72
-  ...
-[specurve] 11:34:00 - Estimating model 72 of 72
-[specurve] 11:34:00 - 69 out of 72 models have point estimates significant at 1% level.
-[specurve] 11:34:00 - 72 out of 72 models have point estimates significant at 5% level.
-[specurve] 11:34:00 - Plotting specification curve...
-(file specurve_demo.gph saved)
-[specurve] 11:34:01 - Completed.
 ```
 
 ![example_reghdfe](https://github.com/mgao6767/specurve/raw/main/images/example_reghdfe.png)
