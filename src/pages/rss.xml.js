@@ -13,7 +13,10 @@ export async function get() {
       title: post.data.title,
       pubDate: post.data.pubDate,
       description: post.data.description,
-      link: `/posts/${post.slug}/`
+      // post.slug split to lang and slug
+      link: post.slug.startsWith('zh')
+        ? `/zh/posts/${post.slug.slice('zh'.length)}/`
+        : `/posts/${post.slug.slice('en'.length)}/`
     })),
     customData: `<language>en-us</language>`
   })
